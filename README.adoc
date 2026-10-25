@@ -1,0 +1,32 @@
+= unitsml-testsuite
+
+Cross-language conformance suite for UnitsML: the frozen render corpus
+replayed by every unitsml runtime (Ruby, TypeScript).
+
+== corpora/renders
+
+89 inputs drawn from unitsml-ruby's conv specs
+(`spec/unitsml/conv/{xml,asciimath,...}_spec.rb`), frozen from
+**unitsml-ruby 0.6.11**:
+
+* `expected-renders.json` — per input: `norm_text`, `asciimath`, and the
+  UnitsML `xml` document. Two rows are frozen as `ruby_error` (the
+  pre-existing unitsml-ruby mml `NoMethodError` on `kcal_IT`); replays
+  skip them and they must flip to `render` rows when upstream is fixed.
+* XML comparison is **semantic** — entities decoded, whitespace between
+  tags collapsed, attribute quoting unified — mirroring the upstream
+  conv specs' `be_xml_equivalent_to` contract.
+
+== Replay contract
+
+A conforming runtime parses each input (`Unitsml.parse` semantics, the
+`unitsml(...)` wrapper and extras included) and asserts:
+
+* `norm_text` equality,
+* AsciiMath render equality,
+* semantic XML equality of the UnitsML document.
+
+`unitsml-ruby` replays via `CORPUS_DIR=… bundle exec rspec
+spec/unitsml/render_corpus_spec.rb`; `unitsml-ts` via
+`CORPUS_DIR=… npm run replay`. Both CI pipelines check this repository
+out and enforce it.

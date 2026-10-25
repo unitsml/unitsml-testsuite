@@ -1,0 +1,806 @@
+{
+  "format": "unitsml-render-oracle/v1",
+  "source": "unitsml-ruby 0.6.11 conv specs (spec/unitsml/conv/*)",
+  "frozen": "2026-10-25",
+  "notes": [
+    "XML comparison is semantic: entities decoded, whitespace between tags collapsed, attribute quoting unified.",
+    "ruby_error rows are frozen pre-existing failures in unitsml-ruby's mml rendering (NoMethodError on Msub); they are skipped by replays and must flip to render rows when upstream is fixed."
+  ],
+  "cases": [
+    {
+      "input": "unitsml(((((Hz^10)*darcy^100))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "((((Hz^10)*darcy^100)))",
+        "asciimath": "((Hz^10)*d^100)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_Hz10.darcy100\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Hz^10*darcy^100</UnitName>\n  <UnitSymbol type=\"HTML\">((Hz<sup>10</sup>)&#x22c5;d<sup>100</sup>)</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <mrow>\n      <mo>(</mo>\n      <msup>\n        <mi mathvariant=\"normal\">Hz</mi>\n        <mn>10</mn>\n      </msup>\n      <mo>)</mo>\n    </mrow>\n    <mo>&#x22c5;</mo>\n    <msup>\n      <mi mathvariant=\"normal\">d</mi>\n      <mn>100</mn>\n    </msup>\n    <mo>)</mo>\n  </mrow>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"hertz\" powerNumerator=\"10\"/>\n    <EnumeratedRootUnit unit=\"darcy\" powerNumerator=\"100\"/>\n  </RootUnits>\n</Unit>"
+      }
+    },
+    {
+      "input": "unitsml(((((g^((((3)))))))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "((((g^((((3))))))))",
+        "asciimath": "((g^((3))))",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_M3\" xml:id=\"U_g3\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">g^3</UnitName>\n  <UnitSymbol type=\"HTML\">((g<sup>((3))</sup>))</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <mrow>\n      <mo>(</mo>\n      <msup>\n        <mi mathvariant=\"normal\">g</mi>\n        <mrow>\n          <mo>(</mo>\n          <mrow>\n            <mo>(</mo>\n            <mn>3</mn>\n            <mo>)</mo>\n          </mrow>\n          <mo>)</mo>\n        </mrow>\n      </msup>\n      <mo>)</mo>\n    </mrow>\n    <mo>)</mo>\n  </mrow>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_M3\">\n  <Mass symbol=\"M\" powerNumerator=\"3\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml((((dim_Theta^10*(((dim_L^2)))))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(((dim_Theta^10*(((dim_L^2))))))",
+        "asciimath": "Theta^10*L^2",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta10\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"10\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml((((m^-2))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(((m^-2)))",
+        "asciimath": "(m^-2)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L-2\" xml:id=\"U_NISTu1e-2/1\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">meter to the power minus two</UnitName>\n  <UnitSymbol type=\"HTML\">(m<sup>&#x2212;2</sup>)</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <msup>\n      <mi mathvariant=\"normal\">m</mi>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>2</mn>\n      </mrow>\n    </msup>\n    <mo>)</mo>\n  </mrow>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd96\">\n  <Length symbol=\"L\" powerNumerator=\"-2\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L-2\">\n  <Length symbol=\"L\" powerNumerator=\"-2\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq190\" quantityType=\"base\" dimensionURL=\"#NISTd96\">\n  <QuantityName xml:lang=\"en\">fluence</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(((Hz^10))*(darcy^100), multiplier: xx)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "((Hz^10))*(darcy^100)",
+        "asciimath": "(Hz^10)xxd^100",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_Hz10.darcy100\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Hz^10*darcy^100</UnitName>\n  <UnitSymbol type=\"HTML\">(Hz<sup>10</sup>)xxd<sup>100</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <msup>\n      <mi mathvariant=\"normal\">Hz</mi>\n      <mn>10</mn>\n    </msup>\n    <mo>)</mo>\n  </mrow>\n  <mo>xx</mo>\n  <msup>\n    <mi mathvariant=\"normal\">d</mi>\n    <mn>100</mn>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"hertz\" powerNumerator=\"10\"/>\n    <EnumeratedRootUnit unit=\"darcy\" powerNumerator=\"100\"/>\n  </RootUnits>\n</Unit>"
+      }
+    },
+    {
+      "input": "unitsml(((Hz^10))*darcy^((((100)))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "((Hz^10))*darcy^((((100))))",
+        "asciimath": "(Hz^10)*d^((100))",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_Hz10.darcy100\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Hz^10*darcy^100</UnitName>\n  <UnitSymbol type=\"HTML\">(Hz<sup>10</sup>)&#x22c5;d<sup>((100))</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <msup>\n      <mi mathvariant=\"normal\">Hz</mi>\n      <mn>10</mn>\n    </msup>\n    <mo>)</mo>\n  </mrow>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">d</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>(</mo>\n        <mn>100</mn>\n        <mo>)</mo>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"hertz\" powerNumerator=\"10\"/>\n    <EnumeratedRootUnit unit=\"darcy\" powerNumerator=\"100\"/>\n  </RootUnits>\n</Unit>"
+      }
+    },
+    {
+      "input": "unitsml(((Hz^10)*darcy^100))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "((Hz^10)*darcy^100)",
+        "asciimath": "(Hz^10)*d^100",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_Hz10.darcy100\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Hz^10*darcy^100</UnitName>\n  <UnitSymbol type=\"HTML\">(Hz<sup>10</sup>)&#x22c5;d<sup>100</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <msup>\n      <mi mathvariant=\"normal\">Hz</mi>\n      <mn>10</mn>\n    </msup>\n    <mo>)</mo>\n  </mrow>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">d</mi>\n    <mn>100</mn>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"hertz\" powerNumerator=\"10\"/>\n    <EnumeratedRootUnit unit=\"darcy\" powerNumerator=\"100\"/>\n  </RootUnits>\n</Unit>"
+      }
+    },
+    {
+      "input": "unitsml(((dim_Theta^10*dim_L^2)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "((dim_Theta^10*dim_L^2))",
+        "asciimath": "Theta^10*L^2",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta10\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"10\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(((g)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "((g))",
+        "asciimath": "(g)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#NISTd2\" xml:id=\"U_NISTu27\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">gram</UnitName>\n  <UnitSymbol type=\"HTML\">(g)</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <mi mathvariant=\"normal\">g</mi>\n    <mo>)</mo>\n  </mrow>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd2\">\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq2\" quantityType=\"base\" dimensionURL=\"#NISTd2\">\n  <QuantityName xml:lang=\"en\">mass</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml((Hz^10)*darcy^((((100)))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(Hz^10)*darcy^((((100))))",
+        "asciimath": "Hz^10*d^((100))",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_Hz10.darcy100\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Hz^10*darcy^100</UnitName>\n  <UnitSymbol type=\"HTML\">Hz<sup>10</sup>&#x22c5;d<sup>((100))</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <msup>\n    <mi mathvariant=\"normal\">Hz</mi>\n    <mn>10</mn>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">d</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>(</mo>\n        <mn>100</mn>\n        <mo>)</mo>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"hertz\" powerNumerator=\"10\"/>\n    <EnumeratedRootUnit unit=\"darcy\" powerNumerator=\"100\"/>\n  </RootUnits>\n</Unit>"
+      }
+    },
+    {
+      "input": "unitsml((dim_Theta)dim_L)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(dim_Theta)dim_L",
+        "asciimath": "(Theta)L",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_LTheta\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml((dim_Theta^10)*dim_L^2)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(dim_Theta^10)*dim_L^2",
+        "asciimath": "Theta^10*L^2",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta10\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"10\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml((dim_phi(dim_I)) ((dim_Theta) dim_L))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(dim_phi(dim_I)) ((dim_Theta) dim_L)",
+        "asciimath": "(phi(I))((Theta)L)",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_LIThetaphi\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n  <ElectricCurrent symbol=\"I\" powerNumerator=\"1\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n  <PlaneAngle symbol=\"phi\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml((m^((-2))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(m^((-2)))",
+        "asciimath": "m^(-2)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L-2\" xml:id=\"U_NISTu1e-2/1\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">meter to the power minus two</UnitName>\n  <UnitSymbol type=\"HTML\">m<sup>(&#x2212;2)</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <msup>\n    <mi mathvariant=\"normal\">m</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>2</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd96\">\n  <Length symbol=\"L\" powerNumerator=\"-2\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L-2\">\n  <Length symbol=\"L\" powerNumerator=\"-2\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq190\" quantityType=\"base\" dimensionURL=\"#NISTd96\">\n  <QuantityName xml:lang=\"en\">fluence</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml((mol * K) J)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(mol * K) J",
+        "asciimath": "(mol*K)J",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2MT-2ThetaN\" xml:id=\"U_mol.K.J\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">mol*K*J</UnitName>\n  <UnitSymbol type=\"HTML\">(mol&#x22c5;K)J</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <mi mathvariant=\"normal\">mol</mi>\n    <mo>&#x22c5;</mo>\n    <mi mathvariant=\"normal\">K</mi>\n    <mo>)</mo>\n  </mrow>\n  <mi mathvariant=\"normal\">J</mi>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"mole\"/>\n    <EnumeratedRootUnit unit=\"kelvin\"/>\n    <EnumeratedRootUnit unit=\"joule\"/>\n  </RootUnits>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2MT-2ThetaN\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n  <AmountOfSubstance symbol=\"N\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml((mol * K)(J))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(mol * K)(J)",
+        "asciimath": "(mol*K)(J)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2MT-2ThetaN\" xml:id=\"U_mol.K.J\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">mol*K*J</UnitName>\n  <UnitSymbol type=\"HTML\">(mol&#x22c5;K)(J)</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <mi mathvariant=\"normal\">mol</mi>\n    <mo>&#x22c5;</mo>\n    <mi mathvariant=\"normal\">K</mi>\n    <mo>)</mo>\n  </mrow>\n  <mrow>\n    <mo>(</mo>\n    <mi mathvariant=\"normal\">J</mi>\n    <mo>)</mo>\n  </mrow>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"mole\"/>\n    <EnumeratedRootUnit unit=\"kelvin\"/>\n    <EnumeratedRootUnit unit=\"joule\"/>\n  </RootUnits>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2MT-2ThetaN\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n  <AmountOfSubstance symbol=\"N\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml((mol * K)(J*K))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(mol * K)(J*K)",
+        "asciimath": "(mol*K)(J*K)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2MT-2Theta2N\" xml:id=\"U_mol.K.J.K\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">mol*K*J*K</UnitName>\n  <UnitSymbol type=\"HTML\">(mol&#x22c5;K)(J&#x22c5;K)</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <mi mathvariant=\"normal\">mol</mi>\n    <mo>&#x22c5;</mo>\n    <mi mathvariant=\"normal\">K</mi>\n    <mo>)</mo>\n  </mrow>\n  <mrow>\n    <mo>(</mo>\n    <mi mathvariant=\"normal\">J</mi>\n    <mo>&#x22c5;</mo>\n    <mi mathvariant=\"normal\">K</mi>\n    <mo>)</mo>\n  </mrow>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"mole\"/>\n    <EnumeratedRootUnit unit=\"kelvin\"/>\n    <EnumeratedRootUnit unit=\"joule\"/>\n    <EnumeratedRootUnit unit=\"kelvin\"/>\n  </RootUnits>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2MT-2Theta2N\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"2\"/>\n  <AmountOfSubstance symbol=\"N\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml((mol * K)J)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "(mol * K)J",
+        "asciimath": "(mol*K)J",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2MT-2ThetaN\" xml:id=\"U_mol.K.J\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">mol*K*J</UnitName>\n  <UnitSymbol type=\"HTML\">(mol&#x22c5;K)J</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <mo>(</mo>\n    <mi mathvariant=\"normal\">mol</mi>\n    <mo>&#x22c5;</mo>\n    <mi mathvariant=\"normal\">K</mi>\n    <mo>)</mo>\n  </mrow>\n  <mi mathvariant=\"normal\">J</mi>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"mole\"/>\n    <EnumeratedRootUnit unit=\"kelvin\"/>\n    <EnumeratedRootUnit unit=\"joule\"/>\n  </RootUnits>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2MT-2ThetaN\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n  <AmountOfSubstance symbol=\"N\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(A*C^3)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "A*C^3",
+        "asciimath": "A*C^3",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_M3I4\" xml:id=\"U_A.C3\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">A*C^3</UnitName>\n  <UnitSymbol type=\"HTML\">A&#x22c5;C<sup>3</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">A</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">C</mi>\n    <mn>3</mn>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"ampere\"/>\n    <EnumeratedRootUnit unit=\"coulomb\" powerNumerator=\"3\"/>\n  </RootUnits>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_M3I4\">\n  <Mass symbol=\"M\" powerNumerator=\"3\"/>\n  <ElectricCurrent symbol=\"I\" powerNumerator=\"4\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(A/C^-3)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "A/C^-3",
+        "asciimath": "A/C^3",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_M3I4\" xml:id=\"U_A.C3\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">A*C^3</UnitName>\n  <UnitSymbol type=\"HTML\">A&#x22c5;C<sup>3</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">A</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">C</mi>\n    <mn>3</mn>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"ampere\"/>\n    <EnumeratedRootUnit unit=\"coulomb\" powerNumerator=\"3\"/>\n  </RootUnits>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_M3I4\">\n  <Mass symbol=\"M\" powerNumerator=\"3\"/>\n  <ElectricCurrent symbol=\"I\" powerNumerator=\"4\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(E_erlang(mm)*kg)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "E_erlang(mm)*kg",
+        "asciimath": "E(mm)*kg",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_E_erlang.mm.kg\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">E_erlang*mm*kg</UnitName>\n  <UnitSymbol type=\"HTML\">E(mm)&#x22c5;kg</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">E</mi>\n  <mrow>\n    <mo>(</mo>\n    <mi mathvariant=\"normal\">mm</mi>\n    <mo>)</mo>\n  </mrow>\n  <mo>&#x22c5;</mo>\n  <mi mathvariant=\"normal\">kg</mi>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"erlang\"/>\n    <EnumeratedRootUnit unit=\"metre\" prefix=\"m\"/>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-3\" xml:id=\"NISTp10_-3\">\n  <PrefixName xml:lang=\"en\">milli</PrefixName>\n  <PrefixSymbol type=\"ASCII\">m</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">m</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">m</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">m</PrefixSymbol>\n</Prefix>\n<Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix>"
+      }
+    },
+    {
+      "input": "unitsml(GHz//V)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "GHz//V",
+        "asciimath": "GHz//V^-1",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L-2M-1T2I\" xml:id=\"U_GHz.V-1\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">GHz*V^-1</UnitName>\n  <UnitSymbol type=\"HTML\">GHz&#x22c5;V<sup>&#x2212;1</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">GHz</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">V</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"hertz\" prefix=\"G\"/>\n    <EnumeratedRootUnit unit=\"volt\" powerNumerator=\"-1\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"9\" xml:id=\"NISTp10_9\">\n  <PrefixName xml:lang=\"en\">giga</PrefixName>\n  <PrefixSymbol type=\"ASCII\">G</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">G</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">G</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">G</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L-2M-1T2I\">\n  <Length symbol=\"L\" powerNumerator=\"-2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"-1\"/>\n  <Time symbol=\"T\" powerNumerator=\"2\"/>\n  <ElectricCurrent symbol=\"I\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(Hz)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "Hz",
+        "asciimath": "Hz",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#NISTd101\" xml:id=\"U_NISTu31\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">hertz</UnitName>\n  <UnitSymbol type=\"HTML\">Hz</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">Hz</mi>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd24\">\n  <Time symbol=\"T\" powerNumerator=\"-1\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd101\">\n  <Time symbol=\"T\" powerNumerator=\"-1\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq45\" quantityType=\"base\" dimensionURL=\"#NISTd24\">\n  <QuantityName xml:lang=\"en\">frequency</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(Hz^10*((darcy^100)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "Hz^10*((darcy^100))",
+        "asciimath": "Hz^10*(d^100)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_Hz10.darcy100\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Hz^10*darcy^100</UnitName>\n  <UnitSymbol type=\"HTML\">Hz<sup>10</sup>&#x22c5;(d<sup>100</sup>)</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <msup>\n    <mi mathvariant=\"normal\">Hz</mi>\n    <mn>10</mn>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <mrow>\n    <mo>(</mo>\n    <msup>\n      <mi mathvariant=\"normal\">d</mi>\n      <mn>100</mn>\n    </msup>\n    <mo>)</mo>\n  </mrow>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"hertz\" powerNumerator=\"10\"/>\n    <EnumeratedRootUnit unit=\"darcy\" powerNumerator=\"100\"/>\n  </RootUnits>\n</Unit>"
+      }
+    },
+    {
+      "input": "unitsml(Hz^10*darcy^100)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "Hz^10*darcy^100",
+        "asciimath": "Hz^10*d^100",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_Hz10.darcy100\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Hz^10*darcy^100</UnitName>\n  <UnitSymbol type=\"HTML\">Hz<sup>10</sup>&#x22c5;d<sup>100</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <msup>\n    <mi mathvariant=\"normal\">Hz</mi>\n    <mn>10</mn>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">d</mi>\n    <mn>100</mn>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"hertz\" powerNumerator=\"10\"/>\n    <EnumeratedRootUnit unit=\"darcy\" powerNumerator=\"100\"/>\n  </RootUnits>\n</Unit>"
+      }
+    },
+    {
+      "input": "unitsml(Hz^10*darcy^100, multiplier: xx)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "Hz^10*darcy^100",
+        "asciimath": "Hz^10xxd^100",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_Hz10.darcy100\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Hz^10*darcy^100</UnitName>\n  <UnitSymbol type=\"HTML\">Hz<sup>10</sup>xxd<sup>100</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <msup>\n    <mi mathvariant=\"normal\">Hz</mi>\n    <mn>10</mn>\n  </msup>\n  <mo>xx</mo>\n  <msup>\n    <mi mathvariant=\"normal\">d</mi>\n    <mn>100</mn>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"hertz\" powerNumerator=\"10\"/>\n    <EnumeratedRootUnit unit=\"darcy\" powerNumerator=\"100\"/>\n  </RootUnits>\n</Unit>"
+      }
+    },
+    {
+      "input": "unitsml(J kg^((-1)) * K^(((-1))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "J kg^((-1)) * K^(((-1)))",
+        "asciimath": "J kg^(-1)*K^(-1)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2M0T-2Theta-1\" xml:id=\"U_NISTu13.u27p10_3e-1/1.u5e-1/1\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">joule per kilogram kelvin</UnitName>\n  <UnitSymbol type=\"HTML\">J&#x22c5;kg<sup>(&#x2212;1)</sup>&#x22c5;K<sup>(&#x2212;1)</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">J</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">kg</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>1</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">K</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>1</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"joule\"/>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\" powerNumerator=\"-1\"/>\n    <EnumeratedRootUnit unit=\"kelvin\" powerNumerator=\"-1\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd40\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2M0T-2Theta-1\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"0\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(J kg^-1 * K^((-1)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "J kg^-1 * K^((-1))",
+        "asciimath": "J kg^-1*K^(-1)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2M0T-2Theta-1\" xml:id=\"U_NISTu13.u27p10_3e-1/1.u5e-1/1\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">joule per kilogram kelvin</UnitName>\n  <UnitSymbol type=\"HTML\">J&#x22c5;kg<sup>&#x2212;1</sup>&#x22c5;K<sup>(&#x2212;1)</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">J</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">kg</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">K</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>1</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"joule\"/>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\" powerNumerator=\"-1\"/>\n    <EnumeratedRootUnit unit=\"kelvin\" powerNumerator=\"-1\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd40\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2M0T-2Theta-1\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"0\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(J kg^-1 * K^-1)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "J kg^-1 * K^-1",
+        "asciimath": "J kg^-1*K^-1",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2M0T-2Theta-1\" xml:id=\"U_NISTu13.u27p10_3e-1/1.u5e-1/1\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">joule per kilogram kelvin</UnitName>\n  <UnitSymbol type=\"HTML\">J&#x22c5;kg<sup>&#x2212;1</sup>&#x22c5;K<sup>&#x2212;1</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">J</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">kg</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">K</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"joule\"/>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\" powerNumerator=\"-1\"/>\n    <EnumeratedRootUnit unit=\"kelvin\" powerNumerator=\"-1\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd40\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2M0T-2Theta-1\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"0\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(J(kg*K))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "J(kg*K)",
+        "asciimath": "J(kg*K)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2M2T-2Theta\" xml:id=\"U_J.kg.K\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">J*kg*K</UnitName>\n  <UnitSymbol type=\"HTML\">J(kg&#x22c5;K)</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">J</mi>\n  <mrow>\n    <mo>(</mo>\n    <mi mathvariant=\"normal\">kg</mi>\n    <mo>&#x22c5;</mo>\n    <mi mathvariant=\"normal\">K</mi>\n    <mo>)</mo>\n  </mrow>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"joule\"/>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\"/>\n    <EnumeratedRootUnit unit=\"kelvin\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2M2T-2Theta\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"2\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(J/(mol * K))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "J/(mol * K)",
+        "asciimath": "J/mol^-1*K^-1",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2MT-2Theta-1N-1\" xml:id=\"U_NISTu13.u6e-1/1.u5e-1/1\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">joule per mole kelvin</UnitName>\n  <UnitSymbol type=\"HTML\">J&#x22c5;mol<sup>&#x2212;1</sup>&#x22c5;K<sup>&#x2212;1</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">J</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">mol</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">K</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"joule\"/>\n    <EnumeratedRootUnit unit=\"mole\" powerNumerator=\"-1\"/>\n    <EnumeratedRootUnit unit=\"kelvin\" powerNumerator=\"-1\"/>\n  </RootUnits>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd48\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n  <AmountOfSubstance symbol=\"N\" powerNumerator=\"-1\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2MT-2Theta-1N-1\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n  <AmountOfSubstance symbol=\"N\" powerNumerator=\"-1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(J/kg*K)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "J/kg*K",
+        "asciimath": "J/kg^-1*K^-1",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2M0T-2Theta-1\" xml:id=\"U_NISTu13.u27p10_3e-1/1.u5e-1/1\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">joule per kilogram kelvin</UnitName>\n  <UnitSymbol type=\"HTML\">J&#x22c5;kg<sup>&#x2212;1</sup>&#x22c5;K<sup>&#x2212;1</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">J</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">kg</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">K</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"joule\"/>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\" powerNumerator=\"-1\"/>\n    <EnumeratedRootUnit unit=\"kelvin\" powerNumerator=\"-1\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd40\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2M0T-2Theta-1\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"0\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(J/mol * K)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "J/mol * K",
+        "asciimath": "J/mol^-1*K^-1",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2MT-2Theta-1N-1\" xml:id=\"U_NISTu13.u6e-1/1.u5e-1/1\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">joule per mole kelvin</UnitName>\n  <UnitSymbol type=\"HTML\">J&#x22c5;mol<sup>&#x2212;1</sup>&#x22c5;K<sup>&#x2212;1</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">J</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">mol</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">K</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"joule\"/>\n    <EnumeratedRootUnit unit=\"mole\" powerNumerator=\"-1\"/>\n    <EnumeratedRootUnit unit=\"kelvin\" powerNumerator=\"-1\"/>\n  </RootUnits>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd48\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n  <AmountOfSubstance symbol=\"N\" powerNumerator=\"-1\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2MT-2Theta-1N-1\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n  <AmountOfSubstance symbol=\"N\" powerNumerator=\"-1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(R-)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "R-",
+        "asciimath": "R",
+        "xml": "<Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"27\" xml:id=\"NISTp10_27\">\n  <PrefixName xml:lang=\"en\">ronna</PrefixName>\n  <PrefixSymbol type=\"ASCII\">R</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">R</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">R</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">R</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd49\">\n  <Mass symbol=\"M\" powerNumerator=\"-1\"/>\n  <Time symbol=\"T\" powerNumerator=\"1\"/>\n  <ElectricCurrent symbol=\"I\" powerNumerator=\"1\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq75\" quantityType=\"base\" dimensionURL=\"#NISTd49\">\n  <QuantityName xml:lang=\"en\">exposure (x and gamma rays)</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(Rm*((A)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "Rm*((A))",
+        "asciimath": "Rm*(A)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_LI\" xml:id=\"U_Rm.A\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Rm*A</UnitName>\n  <UnitSymbol type=\"HTML\">Rm&#x22c5;(A)</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">Rm</mi>\n  <mo>&#x22c5;</mo>\n  <mrow>\n    <mo>(</mo>\n    <mi mathvariant=\"normal\">A</mi>\n    <mo>)</mo>\n  </mrow>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"metre\" prefix=\"R\"/>\n    <EnumeratedRootUnit unit=\"ampere\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"27\" xml:id=\"NISTp10_27\">\n  <PrefixName xml:lang=\"en\">ronna</PrefixName>\n  <PrefixSymbol type=\"ASCII\">R</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">R</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">R</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">R</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_LI\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n  <ElectricCurrent symbol=\"I\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(Rm*A)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "Rm*A",
+        "asciimath": "Rm*A",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_LI\" xml:id=\"U_Rm.A\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Rm*A</UnitName>\n  <UnitSymbol type=\"HTML\">Rm&#x22c5;A</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">Rm</mi>\n  <mo>&#x22c5;</mo>\n  <mi mathvariant=\"normal\">A</mi>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"metre\" prefix=\"R\"/>\n    <EnumeratedRootUnit unit=\"ampere\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"27\" xml:id=\"NISTp10_27\">\n  <PrefixName xml:lang=\"en\">ronna</PrefixName>\n  <PrefixSymbol type=\"ASCII\">R</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">R</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">R</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">R</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_LI\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n  <ElectricCurrent symbol=\"I\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(cd*sr*m^(-2),symbol:cd cdot sr cdot m^(-2))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "cd*sr*m^(-2)",
+        "asciimath": "cd*sr*m^-2",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L-2J\" xml:id=\"U_cd.sr.m-2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">cd*sr*m^-2</UnitName>\n  <UnitSymbol type=\"HTML\">cd&#x22c5;sr&#x22c5;m<sup>&#x2212;2</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">cd</mi>\n  <mo>&#x22c5;</mo>\n  <mi mathvariant=\"normal\">sr</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">m</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>2</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"candela\"/>\n    <EnumeratedRootUnit unit=\"steradian\"/>\n    <EnumeratedRootUnit unit=\"metre\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L-2J\">\n  <Length symbol=\"L\" powerNumerator=\"-2\"/>\n  <LuminousIntensity symbol=\"J\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(d-)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "d-",
+        "asciimath": "d",
+        "xml": "<Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-1\" xml:id=\"NISTp10_-1\">\n  <PrefixName xml:lang=\"en\">deci</PrefixName>\n  <PrefixSymbol type=\"ASCII\">d</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">d</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">d</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">d</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd3\">\n  <Time symbol=\"T\" powerNumerator=\"1\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq3\" quantityType=\"base\" dimensionURL=\"#NISTd3\">\n  <QuantityName xml:lang=\"en\">time</QuantityName>\n  <QuantityName xml:lang=\"en\">duration</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(dB)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dB",
+        "asciimath": "dB",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_NISTu155\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">decibel</UnitName>\n  <UnitSymbol type=\"HTML\">dB</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">dB</mi>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd67\"/><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq90\" quantityType=\"base\" dimensionURL=\"#NISTd67\">\n  <QuantityName xml:lang=\"en\">ratio logarithm (B)</QuantityName>\n  <QuantityName xml:lang=\"en\">logarithmic ratio quantities (power-like quantities using decimal logarithms)</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(da-)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "da-",
+        "asciimath": "da",
+        "xml": "<Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"1\" xml:id=\"NISTp10_1\">\n  <PrefixName xml:lang=\"en\">deka</PrefixName>\n  <PrefixSymbol type=\"ASCII\">da</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">da</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">da</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">da</PrefixSymbol>\n</Prefix>"
+      }
+    },
+    {
+      "input": "unitsml(degK)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "degK",
+        "asciimath": "degK",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#NISTd5\" xml:id=\"U_NISTu5\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">kelvin</UnitName>\n  <UnitSymbol type=\"HTML\">&#176;K</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">°K</mi>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd5\">\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_L)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_L",
+        "asciimath": "L",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_Theta dim_L)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_Theta dim_L",
+        "asciimath": "Theta L",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_LTheta\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_Theta(dim_phi))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_Theta(dim_phi)",
+        "asciimath": "Theta(phi)",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_Thetaphi\">\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n  <PlaneAngle symbol=\"phi\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_Theta*dim_L^((((2)))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_Theta*dim_L^((((2))))",
+        "asciimath": "Theta*L^((2))",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_Theta*dim_L^((2)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_Theta*dim_L^((2))",
+        "asciimath": "Theta*L^(2)",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_Theta*dim_L^2)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_Theta*dim_L^2",
+        "asciimath": "Theta*L^2",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_Theta^10*((dim_L^2)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_Theta^10*((dim_L^2))",
+        "asciimath": "Theta^10*L^2",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta10\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"10\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_Theta^10*dim_L^((((2)))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_Theta^10*dim_L^((((2))))",
+        "asciimath": "Theta^10*L^((2))",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta10\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"10\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_Theta^10*dim_L^((2)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_Theta^10*dim_L^((2))",
+        "asciimath": "Theta^10*L^(2)",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta10\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"10\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_Theta^10*dim_L^(2))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_Theta^10*dim_L^(2)",
+        "asciimath": "Theta^10*L^2",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta10\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"10\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_Theta^10*dim_L^2)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_Theta^10*dim_L^2",
+        "asciimath": "Theta^10*L^2",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2Theta10\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"10\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(dim_phi (dim_Theta dim_L))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "dim_phi (dim_Theta dim_L)",
+        "asciimath": "phi(Theta L)",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_LThetaphi\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n  <PlaneAngle symbol=\"phi\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(g)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "g",
+        "asciimath": "g",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#NISTd2\" xml:id=\"U_NISTu27\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">gram</UnitName>\n  <UnitSymbol type=\"HTML\">g</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">g</mi>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd2\">\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq2\" quantityType=\"base\" dimensionURL=\"#NISTd2\">\n  <QuantityName xml:lang=\"en\">mass</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(h-)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "h-",
+        "asciimath": "h",
+        "xml": "<Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"2\" xml:id=\"NISTp10_2\">\n  <PrefixName xml:lang=\"en\">hecto</PrefixName>\n  <PrefixSymbol type=\"ASCII\">h</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">h</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">h</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">h</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd3\">\n  <Time symbol=\"T\" powerNumerator=\"1\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq3\" quantityType=\"base\" dimensionURL=\"#NISTd3\">\n  <QuantityName xml:lang=\"en\">time</QuantityName>\n  <QuantityName xml:lang=\"en\">duration</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(hp)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "hp",
+        "asciimath": "hp",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_NISTu284\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">horsepower</UnitName>\n  <UnitSymbol type=\"HTML\">hp</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">hp</mi>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd16\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-3\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq20\" quantityType=\"base\" dimensionURL=\"#NISTd16\">\n  <QuantityName xml:lang=\"en\">power</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(k-)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "k-",
+        "asciimath": "k",
+        "xml": "<Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix>"
+      }
+    },
+    {
+      "input": "unitsml(kcal_IT)",
+      "kind": "ruby_error",
+      "error_class": "NoMethodError",
+      "error_message": "undefined method 'value' for an instance of Mml::V4::Msub"
+    },
+    {
+      "input": "unitsml(kcal_IT^100)",
+      "kind": "ruby_error",
+      "error_class": "NoMethodError",
+      "error_message": "undefined method 'value' for an instance of Mml::V4::Msub"
+    },
+    {
+      "input": "unitsml(kg)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "kg",
+        "asciimath": "kg",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#NISTd2\" xml:id=\"U_NISTu2\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">kilogram</UnitName>\n  <UnitSymbol type=\"HTML\">kg</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">kg</mi>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd2\">\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq2\" quantityType=\"base\" dimensionURL=\"#NISTd2\">\n  <QuantityName xml:lang=\"en\">mass</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(kg*m^-1*s^-1*K^(((-1//2))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "kg*m^-1*s^-1*K^(((-1//2)))",
+        "asciimath": "kg*m^-1*s^-1*K^(-1//2)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L-1MT-1Theta-1\" xml:id=\"U_kg.m-1.s-1.K-1//2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">kg*m^-1*s^-1*K^-1//2</UnitName>\n  <UnitSymbol type=\"HTML\">kg&#x22c5;m<sup>&#x2212;1</sup>&#x22c5;s<sup>&#x2212;1</sup>&#x22c5;K<sup>(&#x2212;1//2)</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">kg</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">m</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">s</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>1</mn>\n    </mrow>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">K</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>1//2</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\"/>\n    <EnumeratedRootUnit unit=\"metre\" powerNumerator=\"-1\"/>\n    <EnumeratedRootUnit unit=\"second\" powerNumerator=\"-1\"/>\n    <EnumeratedRootUnit unit=\"kelvin\" powerNumerator=\"-1//2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L-1MT-1Theta-1\">\n  <Length symbol=\"L\" powerNumerator=\"-1\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-1\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"-1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(kg*s^(((-2))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "kg*s^(((-2)))",
+        "asciimath": "kg*s^(-2)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_MT-2\" xml:id=\"U_kg.s-2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">kg*s^-2</UnitName>\n  <UnitSymbol type=\"HTML\">kg&#x22c5;s<sup>(&#x2212;2)</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">kg</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">s</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>2</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\"/>\n    <EnumeratedRootUnit unit=\"second\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_MT-2\">\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(kg*s^((-2)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "kg*s^((-2))",
+        "asciimath": "kg*s^(-2)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_MT-2\" xml:id=\"U_kg.s-2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">kg*s^-2</UnitName>\n  <UnitSymbol type=\"HTML\">kg&#x22c5;s<sup>(&#x2212;2)</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">kg</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">s</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>2</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\"/>\n    <EnumeratedRootUnit unit=\"second\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_MT-2\">\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(kg*s^(-2))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "kg*s^(-2)",
+        "asciimath": "kg*s^-2",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_MT-2\" xml:id=\"U_kg.s-2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">kg*s^-2</UnitName>\n  <UnitSymbol type=\"HTML\">kg&#x22c5;s<sup>&#x2212;2</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">kg</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">s</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>2</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\"/>\n    <EnumeratedRootUnit unit=\"second\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_MT-2\">\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(kg*s^-2)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "kg*s^-2",
+        "asciimath": "kg*s^-2",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_MT-2\" xml:id=\"U_kg.s-2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">kg*s^-2</UnitName>\n  <UnitSymbol type=\"HTML\">kg&#x22c5;s<sup>&#x2212;2</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">kg</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">s</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>2</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\"/>\n    <EnumeratedRootUnit unit=\"second\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_MT-2\">\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(kg, name: custom kilogram)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "kg",
+        "asciimath": "kg",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#NISTd2\" xml:id=\"U_NISTu2\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">custom kilogram</UnitName>\n  <UnitSymbol type=\"HTML\">kg</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">kg</mi>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd2\">\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq2\" quantityType=\"base\" dimensionURL=\"#NISTd2\">\n  <QuantityName xml:lang=\"en\">mass</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(kg^((-1))*m^((-3))*s^4*A^2)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "kg^((-1))*m^((-3))*s^4*A^2",
+        "asciimath": "kg^(-1)*m^(-3)*s^4*A^2",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L-3M-1T4I2\" xml:id=\"U_kg-1.m-3.s4.A2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">kg^-1*m^-3*s^4*A^2</UnitName>\n  <UnitSymbol type=\"HTML\">kg<sup>(&#x2212;1)</sup>&#x22c5;m<sup>(&#x2212;3)</sup>&#x22c5;s<sup>4</sup>&#x22c5;A<sup>2</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <msup>\n    <mi mathvariant=\"normal\">kg</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>1</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">m</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>3</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">s</mi>\n    <mn>4</mn>\n  </msup>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">A</mi>\n    <mn>2</mn>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\" powerNumerator=\"-1\"/>\n    <EnumeratedRootUnit unit=\"metre\" powerNumerator=\"-3\"/>\n    <EnumeratedRootUnit unit=\"second\" powerNumerator=\"4\"/>\n    <EnumeratedRootUnit unit=\"ampere\" powerNumerator=\"2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L-3M-1T4I2\">\n  <Length symbol=\"L\" powerNumerator=\"-3\"/>\n  <Mass symbol=\"M\" powerNumerator=\"-1\"/>\n  <Time symbol=\"T\" powerNumerator=\"4\"/>\n  <ElectricCurrent symbol=\"I\" powerNumerator=\"2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(kg^-2)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "kg^-2",
+        "asciimath": "kg^-2",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_M-2\" xml:id=\"U_kg-2\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">kg^-2</UnitName>\n  <UnitSymbol type=\"HTML\">kg<sup>&#x2212;2</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <msup>\n    <mi mathvariant=\"normal\">kg</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>2</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_M-2\">\n  <Mass symbol=\"M\" powerNumerator=\"-2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(m)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "m",
+        "asciimath": "m",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#NISTd1\" xml:id=\"U_NISTu1\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">metre</UnitName>\n  <UnitSymbol type=\"HTML\">m</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">m</mi>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd1\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(m*kg^-2)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "m*kg^-2",
+        "asciimath": "m*kg^-2",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_LM-2\" xml:id=\"U_m.kg-2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">m*kg^-2</UnitName>\n  <UnitSymbol type=\"HTML\">m&#x22c5;kg<sup>&#x2212;2</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">m</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">kg</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>2</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"metre\"/>\n    <EnumeratedRootUnit unit=\"gram\" prefix=\"k\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"3\" xml:id=\"NISTp10_3\">\n  <PrefixName xml:lang=\"en\">kilo</PrefixName>\n  <PrefixSymbol type=\"ASCII\">k</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">k</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">k</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">k</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_LM-2\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n  <Mass symbol=\"M\" powerNumerator=\"-2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(mOhm)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "mOhm",
+        "asciimath": "mOhm",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L2MT4I2\" xml:id=\"U_mOhm\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">mOhm</UnitName>\n  <UnitSymbol type=\"HTML\">m&#8486;</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">mΩ</mi>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"ohm\" prefix=\"m\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-3\" xml:id=\"NISTp10_-3\">\n  <PrefixName xml:lang=\"en\">milli</PrefixName>\n  <PrefixSymbol type=\"ASCII\">m</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">m</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">m</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">m</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L2MT4I2\">\n  <Length symbol=\"L\" powerNumerator=\"2\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"4\"/>\n  <ElectricCurrent symbol=\"I\" powerNumerator=\"2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(mW*cm^((-2)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "mW*cm^((-2))",
+        "asciimath": "mW*cm^(-2)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_mW.cm-2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">mW*cm^-2</UnitName>\n  <UnitSymbol type=\"HTML\">mW&#x22c5;cm<sup>(&#x2212;2)</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">mW</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">cm</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>2</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"watt\" prefix=\"m\"/>\n    <EnumeratedRootUnit unit=\"metre\" prefix=\"c\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-3\" xml:id=\"NISTp10_-3\">\n  <PrefixName xml:lang=\"en\">milli</PrefixName>\n  <PrefixSymbol type=\"ASCII\">m</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">m</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">m</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">m</PrefixSymbol>\n</Prefix>\n<Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-2\" xml:id=\"NISTp10_-2\">\n  <PrefixName xml:lang=\"en\">centi</PrefixName>\n  <PrefixSymbol type=\"ASCII\">c</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">c</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">c</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">c</PrefixSymbol>\n</Prefix>"
+      }
+    },
+    {
+      "input": "unitsml(mW*cm^(-2))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "mW*cm^(-2)",
+        "asciimath": "mW*cm^-2",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_mW.cm-2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">mW*cm^-2</UnitName>\n  <UnitSymbol type=\"HTML\">mW&#x22c5;cm<sup>&#x2212;2</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">mW</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">cm</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>2</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"watt\" prefix=\"m\"/>\n    <EnumeratedRootUnit unit=\"metre\" prefix=\"c\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-3\" xml:id=\"NISTp10_-3\">\n  <PrefixName xml:lang=\"en\">milli</PrefixName>\n  <PrefixSymbol type=\"ASCII\">m</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">m</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">m</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">m</PrefixSymbol>\n</Prefix>\n<Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-2\" xml:id=\"NISTp10_-2\">\n  <PrefixName xml:lang=\"en\">centi</PrefixName>\n  <PrefixSymbol type=\"ASCII\">c</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">c</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">c</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">c</PrefixSymbol>\n</Prefix>"
+      }
+    },
+    {
+      "input": "unitsml(m^(-2))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "m^(-2)",
+        "asciimath": "m^-2",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L-2\" xml:id=\"U_NISTu1e-2/1\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">meter to the power minus two</UnitName>\n  <UnitSymbol type=\"HTML\">m<sup>&#x2212;2</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <msup>\n    <mi mathvariant=\"normal\">m</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>2</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd96\">\n  <Length symbol=\"L\" powerNumerator=\"-2\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L-2\">\n  <Length symbol=\"L\" powerNumerator=\"-2\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq190\" quantityType=\"base\" dimensionURL=\"#NISTd96\">\n  <QuantityName xml:lang=\"en\">fluence</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(mbar)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "mbar",
+        "asciimath": "mbar",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_NISTu362\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">millibar</UnitName>\n  <UnitSymbol type=\"HTML\">mbar</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">mbar</mi>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"bar\" prefix=\"m\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-3\" xml:id=\"NISTp10_-3\">\n  <PrefixName xml:lang=\"en\">milli</PrefixName>\n  <PrefixSymbol type=\"ASCII\">m</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">m</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">m</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">m</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd14\">\n  <Length symbol=\"L\" powerNumerator=\"-1\"/>\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(mm*s^((-2)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "mm*s^((-2))",
+        "asciimath": "mm*s^(-2)",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_LT-2\" xml:id=\"U_mm.s-2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">mm*s^-2</UnitName>\n  <UnitSymbol type=\"HTML\">mm&#x22c5;s<sup>(&#x2212;2)</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">mm</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">s</mi>\n    <mrow>\n      <mo>(</mo>\n      <mrow>\n        <mo>&#x2212;</mo>\n        <mn>2</mn>\n      </mrow>\n      <mo>)</mo>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"metre\" prefix=\"m\"/>\n    <EnumeratedRootUnit unit=\"second\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-3\" xml:id=\"NISTp10_-3\">\n  <PrefixName xml:lang=\"en\">milli</PrefixName>\n  <PrefixSymbol type=\"ASCII\">m</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">m</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">m</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">m</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_LT-2\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(mm*s^-2)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "mm*s^-2",
+        "asciimath": "mm*s^-2",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_LT-2\" xml:id=\"U_mm.s-2\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">mm*s^-2</UnitName>\n  <UnitSymbol type=\"HTML\">mm&#x22c5;s<sup>&#x2212;2</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">mm</mi>\n  <mo>&#x22c5;</mo>\n  <msup>\n    <mi mathvariant=\"normal\">s</mi>\n    <mrow>\n      <mo>&#x2212;</mo>\n      <mn>2</mn>\n    </mrow>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"metre\" prefix=\"m\"/>\n    <EnumeratedRootUnit unit=\"second\" powerNumerator=\"-2\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-3\" xml:id=\"NISTp10_-3\">\n  <PrefixName xml:lang=\"en\">milli</PrefixName>\n  <PrefixSymbol type=\"ASCII\">m</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">m</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">m</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">m</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_LT-2\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n  <Time symbol=\"T\" powerNumerator=\"-2\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(p-)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "p-",
+        "asciimath": "p",
+        "xml": "<Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-12\" xml:id=\"NISTp10_-12\">\n  <PrefixName xml:lang=\"en\">pico</PrefixName>\n  <PrefixSymbol type=\"ASCII\">p</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">p</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">p</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">p</PrefixSymbol>\n</Prefix>"
+      }
+    },
+    {
+      "input": "unitsml(prime)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "prime",
+        "asciimath": "'",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"U_NISTu147\">\n  <UnitSystem name=\"not_SI\" type=\"not_SI\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">arcminute</UnitName>\n  <UnitSymbol type=\"HTML\">&#8242;</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">′</mi>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd9\">\n  <PlaneAngle symbol=\"phi\" powerNumerator=\"1\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq9\" quantityType=\"base\" dimensionURL=\"#NISTd9\">\n  <QuantityName xml:lang=\"en\">plane angle</QuantityName>\n  <QuantityName xml:lang=\"en\">angle</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(rad)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "rad",
+        "asciimath": "rad",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L0\" xml:id=\"U_NISTu9\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">radian</UnitName>\n  <UnitSymbol type=\"HTML\">rad</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">rad</mi>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd98\">\n  <PlaneAngle symbol=\"phi\" powerNumerator=\"1\"/>\n</Dimension><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L0\">\n  <Length symbol=\"L\" powerNumerator=\"0\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(sqrt((dim_Theta)))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "sqrt((dim_Theta))",
+        "asciimath": "Theta^0.5",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_Theta0.5\">\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"0.5\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(sqrt(Hz))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "sqrt(Hz)",
+        "asciimath": "Hz^0.5",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_T-0.5\" xml:id=\"U_Hz0.5\">\n  <UnitSystem name=\"SI\" type=\"SI_derived\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">Hz^0.5</UnitName>\n  <UnitSymbol type=\"HTML\">Hz<sup>0.5</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <msup>\n    <mi mathvariant=\"normal\">Hz</mi>\n    <mn>0.5</mn>\n  </msup>\n</math></UnitSymbol>\n</Unit><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_T-0.5\">\n  <Time symbol=\"T\" powerNumerator=\"-0.5\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(sqrt(dim_Theta))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "sqrt(dim_Theta)",
+        "asciimath": "Theta^0.5",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_Theta0.5\">\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"0.5\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(sqrt(dim_phi(dim_I)) ((dim_Theta) dim_L))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "sqrt(dim_phi(dim_I)) ((dim_Theta) dim_L)",
+        "asciimath": "phi(I)((Theta)L)",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_LTheta\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(sqrt(dim_phi(dim_I)) ((dim_Theta) dim_L^((12))))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "sqrt(dim_phi(dim_I)) ((dim_Theta) dim_L^((12)))",
+        "asciimath": "phi(I)((Theta)L^(12))",
+        "xml": "<Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L12Theta\">\n  <Length symbol=\"L\" powerNumerator=\"12\"/>\n  <ThermodynamicTemperature symbol=\"Theta\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(sqrt(mm))",
+      "kind": "render",
+      "renders": {
+        "norm_text": "sqrt(mm)",
+        "asciimath": "mm^0.5",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#D_L0.5\" xml:id=\"U_mm0.5\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">mm^0.5</UnitName>\n  <UnitSymbol type=\"HTML\">mm<sup>0.5</sup></UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <msup>\n    <mi mathvariant=\"normal\">mm</mi>\n    <mn>0.5</mn>\n  </msup>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"metre\" prefix=\"m\" powerNumerator=\"0.5\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-3\" xml:id=\"NISTp10_-3\">\n  <PrefixName xml:lang=\"en\">milli</PrefixName>\n  <PrefixSymbol type=\"ASCII\">m</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">m</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">m</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">m</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"D_L0.5\">\n  <Length symbol=\"L\" powerNumerator=\"0.5\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(u-)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "u-",
+        "asciimath": "u",
+        "xml": "<Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-6\" xml:id=\"NISTp10_-6\">\n  <PrefixName xml:lang=\"en\">micro</PrefixName>\n  <PrefixSymbol type=\"ASCII\">u</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">μ</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">$mu$</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">&micro;</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd2\">\n  <Mass symbol=\"M\" powerNumerator=\"1\"/>\n</Dimension><Quantity xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTq2\" quantityType=\"base\" dimensionURL=\"#NISTd2\">\n  <QuantityName xml:lang=\"en\">mass</QuantityName>\n</Quantity>"
+      }
+    },
+    {
+      "input": "unitsml(um)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "um",
+        "asciimath": "um",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#NISTd1\" xml:id=\"U_um\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">um</UnitName>\n  <UnitSymbol type=\"HTML\">&micro;m</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">&#xb5;m</mi>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"metre\" prefix=\"u\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-6\" xml:id=\"NISTp10_-6\">\n  <PrefixName xml:lang=\"en\">micro</PrefixName>\n  <PrefixSymbol type=\"ASCII\">u</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">μ</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">$mu$</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">&micro;</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd1\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    },
+    {
+      "input": "unitsml(um, name: micro meter)",
+      "kind": "render",
+      "renders": {
+        "norm_text": "um",
+        "asciimath": "um",
+        "xml": "<Unit xmlns=\"https://schema.unitsml.org/unitsml/1.0\" dimensionURL=\"#NISTd1\" xml:id=\"U_um\">\n  <UnitSystem name=\"SI\" type=\"SI_base\" xml:lang=\"en\"/>\n  <UnitName xml:lang=\"en\">micro meter</UnitName>\n  <UnitSymbol type=\"HTML\">&micro;m</UnitSymbol>\n  <UnitSymbol type=\"MathMl\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mi mathvariant=\"normal\">&#xb5;m</mi>\n</math></UnitSymbol>\n  <RootUnits>\n    <EnumeratedRootUnit unit=\"metre\" prefix=\"u\"/>\n  </RootUnits>\n</Unit><Prefix xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns=\"https://schema.unitsml.org/unitsml/1.0\" prefixBase=\"10\" prefixPower=\"-6\" xml:id=\"NISTp10_-6\">\n  <PrefixName xml:lang=\"en\">micro</PrefixName>\n  <PrefixSymbol type=\"ASCII\">u</PrefixSymbol>\n  <PrefixSymbol type=\"unicode\">μ</PrefixSymbol>\n  <PrefixSymbol type=\"LaTeX\">$mu$</PrefixSymbol>\n  <PrefixSymbol type=\"HTML\">&micro;</PrefixSymbol>\n</Prefix><Dimension xmlns=\"https://schema.unitsml.org/unitsml/1.0\" xml:id=\"NISTd1\">\n  <Length symbol=\"L\" powerNumerator=\"1\"/>\n</Dimension>"
+      }
+    }
+  ]
+}
