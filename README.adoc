@@ -1,7 +1,7 @@
 = unitsml-testsuite
 
-Cross-language conformance suite for UnitsML: the frozen render corpus
-replayed by every unitsml runtime (Ruby, TypeScript).
+Cross-language conformance suite for UnitsML: the frozen render and
+conversion corpora replayed by every unitsml runtime (Ruby, TypeScript).
 
 == corpora/renders
 
@@ -17,6 +17,32 @@ replayed by every unitsml runtime (Ruby, TypeScript).
   tags collapsed, attribute quoting unified — mirroring the upstream
   conv specs' `be_xml_equivalent_to` contract.
 
+== corpora/conversions
+
+25 conversion vectors from unitsml-ruby#92 (`Conversions` execution,
+unitsml-ruby PRs #98/#99/#100), frozen from the unitsml-ruby
+implementation:
+
+* `expected-conversions.json` — five case kinds:
+  ** `convert` — a `Quantity#convert_to` hop (canonical path, or through
+     caller-supplied `definitions` given as UnitsML
+     `Float64ConversionFrom` XML with their lookup key), expected value
+     as an exact decimal string.
+  ** `difference` — the same for a difference of two quantities
+     (`20 degC − 15 degC → 5 K`): conversion must skip the affine
+     addends.
+  ** `definition` — `Conversion::Definition` execution: forward
+     `y = d + (b/c)(x + a)` and inverse `x = (c/b)(y − d) − a` in exact
+     rational arithmetic, the `exact` flag, and verbatim lexical decimal
+     preservation.
+  ** `resolve` — `initialUnit` resolution: document-local fragments
+     before the register, register fragments, and reference URIs.
+  ** `error` — typed refusals: affine definitions at power ≠ 1,
+     definition-vs-canonical disagreement, unresolvable `initialUnit`,
+     and `SpecialConversionFrom`/`WSDLConversionFrom`.
+* All numeric values are exact decimal strings; replays parse them as
+  Rationals and compare exactly.
+
 == Replay contract
 
 A conforming runtime parses each input (`Unitsml.parse` semantics, the
@@ -30,3 +56,9 @@ A conforming runtime parses each input (`Unitsml.parse` semantics, the
 spec/unitsml/render_corpus_spec.rb`; `unitsml-ts` via
 `CORPUS_DIR=… npm run replay`. Both CI pipelines check this repository
 out and enforce it.
+
+The conversion corpus replays as `CONVERSION_CORPUS_DIR=… bundle exec
+rspec spec/unitsml/conversion_corpus_spec.rb` (unitsml-ruby) and
+`CONVERSION_CORPUS_DIR=… npm run replay:conversions` (unitsml-ts), the
+same checkouts enforced by CI.
+

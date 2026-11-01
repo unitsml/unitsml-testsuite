@@ -1,0 +1,251 @@
+{
+  "schema": 1,
+  "description": "Frozen UnitsML conversion vectors (unitsml-ruby#92): canonical and definition-based conversions, difference semantics, prefix-power scaling, definition execution, initialUnit resolution, and typed refusals. Replay: unitsml-ruby spec/unitsml/conversion_corpus_spec.rb (CONVERSION_CORPUS_DIR); unitsml-ts npm run replay. Numeric values are exact decimal strings parsed as Rationals.",
+  "cases": [
+    {
+      "kind": "convert",
+      "id": "degc-to-k-canonical",
+      "value": "20",
+      "unit_expression": "degC",
+      "target": "K",
+      "expected": "293.15"
+    },
+    {
+      "kind": "convert",
+      "id": "degc-zero-to-k",
+      "value": "0",
+      "unit_expression": "degC",
+      "target": "K",
+      "expected": "273.15"
+    },
+    {
+      "kind": "convert",
+      "id": "k-to-degc-inverse",
+      "value": "293.15",
+      "unit_expression": "K",
+      "target": "degC",
+      "expected": "20"
+    },
+    {
+      "kind": "convert",
+      "id": "degc-to-k-definition",
+      "value": "20",
+      "unit_expression": "degC",
+      "target": "K",
+      "definitions": [
+        {
+          "key": "K",
+          "xml": "<Float64ConversionFrom xml:id=\"K_from_degC\" initialUnit=\"#NISTu23\" finalAddend=\"273.15\" exact=\"true\"/>"
+        }
+      ],
+      "expected": "293.15"
+    },
+    {
+      "kind": "convert",
+      "id": "degc-to-degf-canonical",
+      "value": "20",
+      "unit_expression": "degC",
+      "target": "degF",
+      "expected": "68"
+    },
+    {
+      "kind": "convert",
+      "id": "degc-to-degf-definition",
+      "value": "20",
+      "unit_expression": "degC",
+      "target": "degF",
+      "definitions": [
+        {
+          "key": "degF",
+          "xml": "<Float64ConversionFrom xml:id=\"degF_from_K\" initialUnit=\"#NISTu5\" initialAddend=\"-273.15\" multiplicand=\"9\" divisor=\"5\" finalAddend=\"32\" exact=\"true\"/>"
+        }
+      ],
+      "expected": "68"
+    },
+    {
+      "kind": "convert",
+      "id": "degc-100-to-degf-definition",
+      "value": "100",
+      "unit_expression": "degC",
+      "target": "degF",
+      "definitions": [
+        {
+          "key": "degF",
+          "xml": "<Float64ConversionFrom xml:id=\"degF_from_K\" initialUnit=\"#NISTu5\" initialAddend=\"-273.15\" multiplicand=\"9\" divisor=\"5\" finalAddend=\"32\" exact=\"true\"/>"
+        }
+      ],
+      "expected": "212"
+    },
+    {
+      "kind": "convert",
+      "id": "degf-32-to-k",
+      "value": "32",
+      "unit_expression": "degF",
+      "target": "K",
+      "expected": "273.15"
+    },
+    {
+      "kind": "convert",
+      "id": "degf-212-to-k",
+      "value": "212",
+      "unit_expression": "degF",
+      "target": "K",
+      "expected": "373.15"
+    },
+    {
+      "kind": "convert",
+      "id": "km2-to-m2-prefix-power",
+      "value": "1",
+      "unit_expression": "km^2",
+      "target": "m^2",
+      "expected": "1000000"
+    },
+    {
+      "kind": "convert",
+      "id": "km-to-m-prefix",
+      "value": "5",
+      "unit_expression": "km",
+      "target": "m",
+      "expected": "5000"
+    },
+    {
+      "kind": "difference",
+      "id": "diff-degc-to-k-skips-addends",
+      "value": "20",
+      "unit_expression": "degC",
+      "other_value": "15",
+      "other_unit_expression": "degC",
+      "target": "K",
+      "expected": "5"
+    },
+    {
+      "kind": "difference",
+      "id": "diff-degc-to-k-definition",
+      "value": "20",
+      "unit_expression": "degC",
+      "other_value": "15",
+      "other_unit_expression": "degC",
+      "target": "K",
+      "definitions": [
+        {
+          "key": "K",
+          "xml": "<Float64ConversionFrom xml:id=\"K_from_degC\" initialUnit=\"#NISTu23\" finalAddend=\"273.15\" exact=\"true\"/>"
+        }
+      ],
+      "expected": "5"
+    },
+    {
+      "kind": "definition",
+      "id": "def-degc-forward-inverse-exact",
+      "xml": "<Float64ConversionFrom xml:id=\"degC_from_K\" initialUnit=\"#UAA033\" finalAddend=\"273.15\" exact=\"true\"/>",
+      "document_units": { "UAA033": "kelvin" },
+      "exact": true,
+      "operations": [
+        { "op": "forward", "input": "0", "expected": "273.15" },
+        { "op": "forward", "input": "100", "expected": "373.15" },
+        { "op": "inverse", "input": "273.15", "expected": "0" },
+        { "op": "inverse", "input": "373.15", "expected": "100" }
+      ]
+    },
+    {
+      "kind": "definition",
+      "id": "def-degf-five-ninths-exact",
+      "xml": "<Float64ConversionFrom xml:id=\"degF_from_K\" initialUnit=\"#UAA033\" initialAddend=\"-273.15\" multiplicand=\"9\" divisor=\"5\" finalAddend=\"32\" exact=\"true\"/>",
+      "document_units": { "UAA033": "kelvin" },
+      "exact": true,
+      "operations": [
+        { "op": "forward", "input": "273.15", "expected": "32" },
+        { "op": "forward", "input": "373.15", "expected": "212" },
+        { "op": "inverse", "input": "212", "expected": "373.15" }
+      ]
+    },
+    {
+      "kind": "definition",
+      "id": "def-percent-to-one-exact",
+      "xml": "<Float64ConversionFrom xml:id=\"pct_from_one\" initialUnit=\"#one\" divisor=\"100\" exact=\"true\"/>",
+      "exact": true,
+      "operations": [
+        { "op": "forward", "input": "1", "expected": "0.01" },
+        { "op": "inverse", "input": "0.01", "expected": "1" }
+      ]
+    },
+    {
+      "kind": "definition",
+      "id": "def-non-exact-preserves-precision",
+      "xml": "<Float64ConversionFrom xml:id=\"ppd_from_deg\" initialUnit=\"#deg\" finalAddend=\"0.5729577951308232087679815481\"/>",
+      "exact": false,
+      "lexical": { "final_addend": "0.5729577951308232087679815481" },
+      "operations": []
+    },
+    {
+      "kind": "resolve",
+      "id": "resolve-document-local-fragment",
+      "xml": "<Float64ConversionFrom xml:id=\"d\" initialUnit=\"#UAA033\" finalAddend=\"273.15\"/>",
+      "document_units": { "UAA033": "kelvin" },
+      "resolves_to": "kelvin"
+    },
+    {
+      "kind": "resolve",
+      "id": "resolve-register-fragment-fallback",
+      "xml": "<Float64ConversionFrom xml:id=\"d\" initialUnit=\"#NISTu23\" finalAddend=\"273.15\"/>",
+      "resolves_to_identifier": "NISTu23"
+    },
+    {
+      "kind": "resolve",
+      "id": "resolve-reference-uri",
+      "xml": "<Float64ConversionFrom xml:id=\"d\" initialUnit=\"http://si-digital-framework.org/SI/units/degreeCelsius\" finalAddend=\"273.15\"/>",
+      "resolves_to_identifier": "NISTu23"
+    },
+    {
+      "kind": "error",
+      "id": "err-affine-definition-at-power",
+      "operation": "canonical",
+      "expression": "degF^2",
+      "definitions": [
+        {
+          "key": "degF",
+          "xml": "<Float64ConversionFrom xml:id=\"degF_from_K\" initialUnit=\"#NISTu5\" initialAddend=\"-273.15\" multiplicand=\"9\" divisor=\"5\" finalAddend=\"32\" exact=\"true\"/>"
+        }
+      ],
+      "error": "ConversionError",
+      "matches": "affine unit raised to power"
+    },
+    {
+      "kind": "error",
+      "id": "err-definition-disagrees-with-canonical",
+      "value": "20",
+      "unit_expression": "K",
+      "target": "degC",
+      "definitions": [
+        {
+          "key": "degC",
+          "xml": "<Float64ConversionFrom xml:id=\"bad_degC\" initialUnit=\"#NISTu5\" finalAddend=\"-273.16\" exact=\"true\"/>"
+        }
+      ],
+      "error": "ConversionError",
+      "matches": "disagrees with canonical data"
+    },
+    {
+      "kind": "error",
+      "id": "err-unresolvable-initial-unit",
+      "xml": "<Float64ConversionFrom xml:id=\"dangling\" initialUnit=\"#nowhere\"/>",
+      "document_units": {},
+      "error": "ConversionError",
+      "matches": "unresolvable initialUnit \"#nowhere\""
+    },
+    {
+      "kind": "error",
+      "id": "err-special-conversion-refused",
+      "xml": "<SpecialConversionFrom xml:id=\"sp_from_x\" initialUnit=\"#x\" conversionURL=\"https://example.com/convert\"/>",
+      "error": "ConversionError",
+      "matches": "SpecialConversionFrom .*not executable"
+    },
+    {
+      "kind": "error",
+      "id": "err-wsdl-conversion-refused",
+      "xml": "<WSDLConversionFrom xml:id=\"wsdl_from_x\" initialUnit=\"#x\" wsdlURL=\"https://example.com/convert?wsdl\"/>",
+      "error": "ConversionError",
+      "matches": "WSDLConversionFrom .*not executable"
+    }
+  ]
+}
