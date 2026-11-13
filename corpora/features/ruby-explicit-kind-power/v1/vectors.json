@@ -1,0 +1,1265 @@
+{
+ "schema": "unitsml-testsuite-ruby-explicit-kind-power/1",
+ "status": "current_api_behaviour",
+ "count": 22,
+ "profiles": [
+  "unitsdb-2.2.15",
+  "unitsdb-143-b0b4315"
+ ],
+ "snapshots": {
+  "unitsdb-2.2.15": {
+   "loader": "Unitsml::Unitsdb::Database.from_db(DATA_DIR, context: :unitsml_ruby) injected as Unitsml::Unitsdb.database",
+   "snapshot_in_use": true,
+   "data_files_sha256": {
+    "quantities.yaml": "0c843d025f39adc88f278e7a4b8746a83bb728fd21c788d4d4c2001ef671c6a6",
+    "units.yaml": "e8b890ca5d979b14c4d8a565f86eae798d8b8953f94665a0d0c1a1c76f08b617",
+    "dimensions.yaml": "26138cd81460e7d40c2116c2a44ad2d61a8ce7b9e1d47f4a4b484e0ad569c88c",
+    "prefixes.yaml": "249bab11534af4a01f5ba754457c23beff4290ec373b646e48a140c5faf45637",
+    "scales.yaml": "30cacb5692dcd998c46d5400ba856b8588c7f5c5d4349aaea4543ee5e277e5d1",
+    "unit_systems.yaml": "be235beedc5c372f7fd47407e631af8750d2547c5e32a3c5e1c636ea9879d669"
+   },
+   "unitsml": "0.6.14",
+   "unitsdb_gem": "2.2.15",
+   "ruby": "4.0.1",
+   "quantities": {
+    "NISTq187": {
+     "names": [
+      "apparent power"
+     ],
+     "dimension": "NISTd16",
+     "equivalence_class": null,
+     "referencing_units": [
+      {
+       "unit": "NISTu401",
+       "primary": null,
+       "references": 1
+      }
+     ]
+    },
+    "NISTq20": {
+     "names": [
+      "power",
+      "puissance, flux énergétique"
+     ],
+     "dimension": "NISTd16",
+     "equivalence_class": null,
+     "referencing_units": [
+      {
+       "unit": "NISTu127",
+       "primary": true,
+       "references": 2
+      },
+      {
+       "unit": "NISTu14",
+       "primary": true,
+       "references": 2
+      },
+      {
+       "unit": "NISTu211",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu217",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu218",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu225",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu274",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu284",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu285",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu286",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu287",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu349",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu74",
+       "primary": true,
+       "references": 2
+      },
+      {
+       "unit": "NISTu75",
+       "primary": true,
+       "references": 2
+      },
+      {
+       "unit": "NISTu89",
+       "primary": true,
+       "references": 2
+      }
+     ]
+    }
+   },
+   "volt_ampere_units": []
+  },
+  "unitsdb-143-b0b4315": {
+   "loader": "Unitsml::Unitsdb::Database.from_db(DATA_DIR, context: :unitsml_ruby) injected as Unitsml::Unitsdb.database",
+   "snapshot_in_use": true,
+   "data_files_sha256": {
+    "quantities.yaml": "0c843d025f39adc88f278e7a4b8746a83bb728fd21c788d4d4c2001ef671c6a6",
+    "units.yaml": "aac53ed54cb38632d6bdc942022261bf8a369d8e3630d39ecce2567aadb745bd",
+    "dimensions.yaml": "26138cd81460e7d40c2116c2a44ad2d61a8ce7b9e1d47f4a4b484e0ad569c88c",
+    "prefixes.yaml": "249bab11534af4a01f5ba754457c23beff4290ec373b646e48a140c5faf45637",
+    "scales.yaml": "30cacb5692dcd998c46d5400ba856b8588c7f5c5d4349aaea4543ee5e277e5d1",
+    "unit_systems.yaml": "be235beedc5c372f7fd47407e631af8750d2547c5e32a3c5e1c636ea9879d669"
+   },
+   "unitsml": "0.6.14",
+   "unitsdb_gem": "2.2.15",
+   "ruby": "4.0.1",
+   "quantities": {
+    "NISTq187": {
+     "names": [
+      "apparent power"
+     ],
+     "dimension": "NISTd16",
+     "equivalence_class": null,
+     "referencing_units": [
+      {
+       "unit": "NISTu401",
+       "primary": null,
+       "references": 1
+      }
+     ]
+    },
+    "NISTq20": {
+     "names": [
+      "power",
+      "puissance, flux énergétique"
+     ],
+     "dimension": "NISTd16",
+     "equivalence_class": null,
+     "referencing_units": [
+      {
+       "unit": "NISTu127",
+       "primary": true,
+       "references": 2
+      },
+      {
+       "unit": "NISTu14",
+       "primary": true,
+       "references": 2
+      },
+      {
+       "unit": "NISTu211",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu217",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu218",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu225",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu274",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu284",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu285",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu286",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu287",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu349",
+       "primary": null,
+       "references": 1
+      },
+      {
+       "unit": "NISTu74",
+       "primary": true,
+       "references": 2
+      },
+      {
+       "unit": "NISTu75",
+       "primary": true,
+       "references": 2
+      },
+      {
+       "unit": "NISTu89",
+       "primary": true,
+       "references": 2
+      }
+     ]
+    }
+   },
+   "volt_ampere_units": []
+  }
+ },
+ "cases": [
+  {
+   "id": "construct-kva-kind-nistq187",
+   "family": "construction",
+   "item": 1,
+   "call": "Quantity.new(value: 3, unit: \"kV*A\", kind: \"NISTq187\")",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "construct-kva-kind-nistq20",
+   "family": "construction",
+   "item": 1,
+   "call": "Quantity.new(value: 3, unit: \"kV*A\", kind: \"NISTq20\")",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq20",
+        "name": "power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq20",
+        "name": "power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "construct-kva-kind-primary",
+   "family": "construction",
+   "item": 1,
+   "call": "Quantity.new(value: 3, unit: \"kV*A\", kind: :primary)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::UnknownQuantityKindError",
+     "message": "\"kV*A\" names no single unit with a primary quantity"
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::UnknownQuantityKindError",
+     "message": "\"kV*A\" names no single unit with a primary quantity"
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "construct-kw-kind-nistq187",
+   "family": "construction",
+   "item": 1,
+   "call": "Quantity.new(value: 3, unit: \"kW\", kind: \"NISTq187\")",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kW",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": {
+         "id": "NISTq20",
+         "name": "power",
+         "equivalence_class": null,
+         "dimension_id": "NISTd16"
+        }
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kW",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": {
+         "id": "NISTq20",
+         "name": "power",
+         "equivalence_class": null,
+         "dimension_id": "NISTd16"
+        }
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "construct-kw-kind-primary",
+   "family": "construction",
+   "item": 1,
+   "call": "Quantity.new(value: 3, unit: \"kW\", kind: :primary)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kW",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq20",
+        "name": "power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": {
+         "id": "NISTq20",
+         "name": "power",
+         "equivalence_class": null,
+         "dimension_id": "NISTd16"
+        }
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kW",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq20",
+        "name": "power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": {
+         "id": "NISTq20",
+         "name": "power",
+         "equivalence_class": null,
+         "dimension_id": "NISTd16"
+        }
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "convert-kva-nistq187-to-kw",
+   "family": "conversion",
+   "item": 2,
+   "call": "Quantity.new(value: 3, unit: \"kV*A\", kind: \"NISTq187\").convert_to(\"kW\")",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "3/1"
+       },
+       "unit": "kW",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": {
+         "id": "NISTq20",
+         "name": "power",
+         "equivalence_class": null,
+         "dimension_id": "NISTd16"
+        }
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "3/1"
+       },
+       "unit": "kW",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": {
+         "id": "NISTq20",
+         "name": "power",
+         "equivalence_class": null,
+         "dimension_id": "NISTd16"
+        }
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "convert-kva-nistq20-to-kw",
+   "family": "conversion",
+   "item": 2,
+   "call": "Quantity.new(value: 3, unit: \"kV*A\", kind: \"NISTq20\").convert_to(\"kW\")",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "3/1"
+       },
+       "unit": "kW",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq20",
+        "name": "power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": {
+         "id": "NISTq20",
+         "name": "power",
+         "equivalence_class": null,
+         "dimension_id": "NISTd16"
+        }
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "3/1"
+       },
+       "unit": "kW",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq20",
+        "name": "power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": {
+         "id": "NISTq20",
+         "name": "power",
+         "equivalence_class": null,
+         "dimension_id": "NISTd16"
+        }
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "convert-kva-untyped-to-kw",
+   "family": "conversion",
+   "item": 2,
+   "call": "Quantity.new(value: 3, unit: \"kV*A\").convert_to(\"kW\")",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "3/1"
+       },
+       "unit": "kW",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": null,
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": {
+         "id": "NISTq20",
+         "name": "power",
+         "equivalence_class": null,
+         "dimension_id": "NISTd16"
+        }
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "3/1"
+       },
+       "unit": "kW",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": null,
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": {
+         "id": "NISTq20",
+         "name": "power",
+         "equivalence_class": null,
+         "dimension_id": "NISTd16"
+        }
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "convert-kw-nistq187-to-kva",
+   "family": "conversion",
+   "item": 2,
+   "call": "Quantity.new(value: 3, unit: \"kW\", kind: \"NISTq187\").convert_to(\"kV*A\")",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "3/1"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "3/1"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "add-kva-nistq187-kva-nistq20",
+   "family": "typed_arithmetic",
+   "item": 3,
+   "call": "kV*A(NISTq187) + kV*A(NISTq20)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::QuantityKindMismatchError",
+     "message": "NISTq187 (apparent power) and NISTq20 (power) are not interchangeable: no shared equivalence class"
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::QuantityKindMismatchError",
+     "message": "NISTq187 (apparent power) and NISTq20 (power) are not interchangeable: no shared equivalence class"
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "sub-kva-nistq187-kva-nistq20",
+   "family": "typed_arithmetic",
+   "item": 3,
+   "call": "kV*A(NISTq187) - kV*A(NISTq20)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::QuantityKindMismatchError",
+     "message": "NISTq187 (apparent power) and NISTq20 (power) are not interchangeable: no shared equivalence class"
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::QuantityKindMismatchError",
+     "message": "NISTq187 (apparent power) and NISTq20 (power) are not interchangeable: no shared equivalence class"
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "add-kva-nistq187-kw-nistq20",
+   "family": "typed_arithmetic",
+   "item": 3,
+   "call": "kV*A(NISTq187) + kW(NISTq20)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::QuantityKindMismatchError",
+     "message": "NISTq187 (apparent power) and NISTq20 (power) are not interchangeable: no shared equivalence class"
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::QuantityKindMismatchError",
+     "message": "NISTq187 (apparent power) and NISTq20 (power) are not interchangeable: no shared equivalence class"
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "sub-kva-nistq187-kw-nistq20",
+   "family": "typed_arithmetic",
+   "item": 3,
+   "call": "kV*A(NISTq187) - kW(NISTq20)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::QuantityKindMismatchError",
+     "message": "NISTq187 (apparent power) and NISTq20 (power) are not interchangeable: no shared equivalence class"
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::QuantityKindMismatchError",
+     "message": "NISTq187 (apparent power) and NISTq20 (power) are not interchangeable: no shared equivalence class"
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "add-kva-nistq187-kw-primary",
+   "family": "typed_arithmetic",
+   "item": 3,
+   "call": "kV*A(NISTq187) + kW(kind: :primary)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::QuantityKindMismatchError",
+     "message": "NISTq187 (apparent power) and NISTq20 (power) are not interchangeable: no shared equivalence class"
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "error",
+     "error_class": "Unitsml::Errors::QuantityKindMismatchError",
+     "message": "NISTq187 (apparent power) and NISTq20 (power) are not interchangeable: no shared equivalence class"
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "eq-kva-nistq187-kva-nistq20",
+   "family": "typed_arithmetic",
+   "item": 3,
+   "call": "kV*A(NISTq187) == kV*A(NISTq20)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "value": false
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "value": false
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "add-kva-nistq187-kva-nistq187",
+   "family": "typed_arithmetic_control",
+   "item": 3,
+   "call": "kV*A(NISTq187) + kV*A(NISTq187)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "6"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "6"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "add-kva-nistq187-kw-untyped",
+   "family": "typed_arithmetic_control",
+   "item": 3,
+   "call": "kV*A(NISTq187) + kW(untyped)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "6/1"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "6/1"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq187",
+        "name": "apparent power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "add-kva-untyped-kw-nistq20",
+   "family": "typed_arithmetic_control",
+   "item": 3,
+   "call": "kV*A(untyped) + kW(NISTq20)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "6/1"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq20",
+        "name": "power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Rational",
+        "text": "6/1"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": {
+        "id": "NISTq20",
+        "name": "power",
+        "equivalence_class": null,
+        "dimension_id": "NISTd16"
+       },
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "product-kv-times-a-untyped",
+   "family": "untyped_product",
+   "item": 4,
+   "call": "Quantity.new(value: 3, unit: \"kV\") * Quantity.new(value: 1, unit: \"A\")",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": null,
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": null,
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "product-kv-times-a-typed-primary-operand",
+   "family": "untyped_product",
+   "item": 4,
+   "call": "Quantity.new(value: 3, unit: \"kV\") * Quantity.new(value: 1, unit: \"A\", kind: :primary)",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": null,
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": null,
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "parsed-kva-untyped",
+   "family": "untyped_product",
+   "item": 4,
+   "call": "Quantity.new(value: 3, unit: \"kV*A\")",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": null,
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "quantity": {
+       "value": {
+        "class": "Integer",
+        "text": "3"
+       },
+       "unit": "kV*A",
+       "dimension_id": "NISTd16",
+       "scale": "ratio",
+       "kind": null,
+       "primary_kind": {
+        "outcome": "ok",
+        "kind": null
+       }
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  },
+  {
+   "id": "primary-kind-kw",
+   "family": "untyped_product",
+   "item": 4,
+   "call": "Quantity.new(value: 3, unit: \"kW\").primary_kind",
+   "status": "current_api_behaviour",
+   "expected": {
+    "unitsdb-2.2.15": {
+     "outcome": "ok",
+     "result": {
+      "value": {
+       "id": "NISTq20",
+       "name": "power",
+       "equivalence_class": null,
+       "dimension_id": "NISTd16"
+      }
+     }
+    },
+    "unitsdb-143-b0b4315": {
+     "outcome": "ok",
+     "result": {
+      "value": {
+       "id": "NISTq20",
+       "name": "power",
+       "equivalence_class": null,
+       "dimension_id": "NISTd16"
+      }
+     }
+    }
+   },
+   "profiles_agree": true,
+   "comparison": "expected: exact equality per profile of outcome, error_class and message, or of the returned quantity (value class and text, unit, dimension_id, scale, kind, primary_kind)"
+  }
+ ]
+}
