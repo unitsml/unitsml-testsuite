@@ -1,0 +1,145 @@
+{
+ "schema": "unitsml-testsuite-unitsdb-schema-roundtrip-index/1",
+ "card": "F40",
+ "generation": "unitsdb-schema-roundtrip/v1",
+ "relationship": "New additive generation; no earlier file changed. The 7 unit-text roundtrip rows of ruby-feature-additions/v1 stay the string part of F02.roundtrips; this generation adds the schema/provenance part.",
+ "requirement": "context/research/WORK-PACKAGES.md:44 'exact string/schema/provenance roundtrips' (F02 acceptance)",
+ "contract": "unitsdb-ruby v2.2.15 specs: spec/unitsdb/<collection>_spec.rb and <entity>_spec.rb check from_yaml(raw).to_yaml with canon be_yaml_equivalent_to(raw); spec/unitsdb/database_spec.rb checks Database.from_db(dir).to_yaml against the combined collections. This producer runs the same calls with the same matcher and adds class-exact structural equality, per-field preservation and schema evaluation; any mismatch fails the row.",
+ "checks": {
+  "database": "Unitsdb::Database.from_db(dir).to_yaml vs combined collections: canon + strict",
+  "collection": "Unitsdb::<Collection>.from_yaml(raw).to_yaml vs raw: canon + strict, schema_version kept with class, record count, schema errors on output not on input, canonical JSON sha256 before/after, YAML byte sha256 before/after",
+  "record": "Unitsdb::<Entity>.from_yaml(record.to_yaml).to_yaml (canon + strict) and the record inside the collection output (strict); per-field preservation for every schema-declared field, every key the record carries and identifiers/references/quantity_references/equivalence_class/canonical_conversion/scale_reference; schema evaluation on input and entity output",
+  "strict": "recursive equality of parsed YAML including value class (1, '1' and 1.0 differ), with dropped/added keys, lengths and values listed by path; mapping key order is counted (key_order_paths) and does not fail a row",
+  "schema": "draft-06 subset evaluated: $ref, type, required, properties, items, enum, const, pattern, minimum; keywords not evaluated are listed per collection (format; allOf/if/then in prefixes)"
+ },
+ "producer": {
+  "script": "archive/capture-unitsdb-roundtrip.rb",
+  "unitsml": "unitsml-ruby 2ec9583a1902a2c13fd508f3bec558a2adde5de7 (0.6.14, required before unitsdb)",
+  "gems": {
+   "unitsdb": "2.2.15",
+   "lutaml-model": "0.8.175",
+   "canon": "0.3.125"
+  },
+  "runtime": "ruby 4.0.1 +PRISM x86_64-linux, TZ=UTC LC_ALL=C.UTF-8, session-local bundle, four separate processes (two profiles x two runs), nice -n 19",
+  "runs_byte_equal": true,
+  "stderr": "each run's stderr holds one line, 'fatal: not a git repository', from unitsml-ruby's gemspec (spec.files = `git ls-files -z`) because the 2ec9583 tree is a git-archive extraction; the producer records no revision through git (2ec9583 was resolved with git rev-parse in the source clone) and the loaded unitsml 0.6.14 code is that tree"
+ },
+ "profiles": {
+  "unitsdb-gem-2.2.15": {
+   "payload": "archive/unitsdb-roundtrip-gem-2.2.15.jsonl",
+   "rerun": "archive/unitsdb-roundtrip-gem-2.2.15-rerun.jsonl",
+   "payload_sha256": "6678336f48a7ab29608a539ceebf7ce17f1bebe048109b7c452f2a27a80ff592",
+   "data_files_sha256": {
+    "currencies.yaml": "f289e1e2034d3dad2addc8d8bc932a6a706bd05264f9ec0740ef8b29b67db1a6",
+    "dimensions.yaml": "26138cd81460e7d40c2116c2a44ad2d61a8ce7b9e1d47f4a4b484e0ad569c88c",
+    "prefixes.yaml": "249bab11534af4a01f5ba754457c23beff4290ec373b646e48a140c5faf45637",
+    "quantities.yaml": "0c843d025f39adc88f278e7a4b8746a83bb728fd21c788d4d4c2001ef671c6a6",
+    "scales.yaml": "30cacb5692dcd998c46d5400ba856b8588c7f5c5d4349aaea4543ee5e277e5d1",
+    "schemas/currencies-schema.yaml": "dae93076773b36474bbaa54c7ff07104328e07d0d65c4a158c8f297f2ad17643",
+    "schemas/dimensions-schema.yaml": "346aafc6ac308fb1f52fbcefeb6a556c9a6b233698f291173c5e1a9285736a5c",
+    "schemas/prefixes-schema.yaml": "16af2afbbcb3526c652d383e0dc333931b09f5dd78ea96a0503a367ebd2ef44d",
+    "schemas/quantities-schema.yaml": "c5c853f4f4c0e36d1cade841f468e7f2b44cb9b241eb81b3265429f1f157cdfb",
+    "schemas/scales-schema.yaml": "bf1f54e3ecbd50fcb9fa8d5ced798e145513d56864b5ce8dc55f0a1412820cbd",
+    "schemas/unit_systems-schema.yaml": "909865eabecc57e5d86c80a5417435b866f7f958aa4457520f3344b305069d14",
+    "schemas/units-schema.yaml": "66d8fdad9eae534ae0d3b18a0deac53b073e4669b2930c75177143b824e2084d",
+    "unit_systems.yaml": "be235beedc5c372f7fd47407e631af8750d2547c5e32a3c5e1c636ea9879d669",
+    "units.yaml": "e8b890ca5d979b14c4d8a565f86eae798d8b8953f94665a0d0c1a1c76f08b617"
+   },
+   "records_per_collection": {
+    "prefixes": 33,
+    "dimensions": 93,
+    "units": 380,
+    "quantities": 200,
+    "unit_systems": 8,
+    "currencies": 178,
+    "scales": 5
+   },
+   "outcomes": {
+    "pass": 904,
+    "not_applicable": 1
+   },
+   "failing_ids": [],
+   "database_canonical_json_sha256": "72946025f2ea7ec9e0dbbd1923e2154fc6f0fc775fee44eddc5e459b68abce20",
+   "data": "unitsdb gem 2.2.15 bundled data/ (unitsdb-ruby v2.2.15 submodule data -> unitsml/unitsdb 035665f8f87633c921e9a262478910d28fe85e37), loaded from the session bundle's installed gem directory, read only"
+  },
+  "unitsdb-b0b4315": {
+   "payload": "archive/unitsdb-roundtrip-b0b4315.jsonl",
+   "rerun": "archive/unitsdb-roundtrip-b0b4315-rerun.jsonl",
+   "payload_sha256": "d79d1630317d0286e579e325c4d9ac7effb6d5df13a4b98a840b16f45db32c5f",
+   "data_files_sha256": {
+    "currencies.yaml": "f289e1e2034d3dad2addc8d8bc932a6a706bd05264f9ec0740ef8b29b67db1a6",
+    "dimensions.yaml": "26138cd81460e7d40c2116c2a44ad2d61a8ce7b9e1d47f4a4b484e0ad569c88c",
+    "prefixes.yaml": "249bab11534af4a01f5ba754457c23beff4290ec373b646e48a140c5faf45637",
+    "quantities.yaml": "0c843d025f39adc88f278e7a4b8746a83bb728fd21c788d4d4c2001ef671c6a6",
+    "scales.yaml": "30cacb5692dcd998c46d5400ba856b8588c7f5c5d4349aaea4543ee5e277e5d1",
+    "schemas/currencies-schema.yaml": "dae93076773b36474bbaa54c7ff07104328e07d0d65c4a158c8f297f2ad17643",
+    "schemas/dimensions-schema.yaml": "346aafc6ac308fb1f52fbcefeb6a556c9a6b233698f291173c5e1a9285736a5c",
+    "schemas/prefixes-schema.yaml": "16af2afbbcb3526c652d383e0dc333931b09f5dd78ea96a0503a367ebd2ef44d",
+    "schemas/quantities-schema.yaml": "c5c853f4f4c0e36d1cade841f468e7f2b44cb9b241eb81b3265429f1f157cdfb",
+    "schemas/scales-schema.yaml": "bf1f54e3ecbd50fcb9fa8d5ced798e145513d56864b5ce8dc55f0a1412820cbd",
+    "schemas/unit_systems-schema.yaml": "909865eabecc57e5d86c80a5417435b866f7f958aa4457520f3344b305069d14",
+    "schemas/units-schema.yaml": "66d8fdad9eae534ae0d3b18a0deac53b073e4669b2930c75177143b824e2084d",
+    "unit_systems.yaml": "be235beedc5c372f7fd47407e631af8750d2547c5e32a3c5e1c636ea9879d669",
+    "units.yaml": "aac53ed54cb38632d6bdc942022261bf8a369d8e3630d39ecce2567aadb745bd"
+   },
+   "records_per_collection": {
+    "prefixes": 33,
+    "dimensions": 93,
+    "units": 380,
+    "quantities": 200,
+    "unit_systems": 8,
+    "currencies": 178,
+    "scales": 5
+   },
+   "outcomes": {
+    "pass": 904,
+    "not_applicable": 1
+   },
+   "failing_ids": [],
+   "database_canonical_json_sha256": "f3fc7971a05c91f15895fe8d7ce4bb78532f95364c5a03216497266f6a766fe6",
+   "data": "unitsml/unitsdb b0b4315fc5b53f6caa0a1edb94707b4f13223b38 (tree c57eb0ae330b051e6ea7909aeabe0a89b77707ed, final merged UnitsDB #143), git archive extraction made read only (chmod a-w), loaded with Database.from_db(dir)"
+  }
+ },
+ "acceptance": "Ruby-generated results (WORK-PACKAGES.md:99 category 'accepted Ruby-generated results'): the unitsdb-ruby library's own roundtrip under its own spec matcher, two runs byte-equal per profile.",
+ "findings": [
+  "Both profiles: 897 records in 7 collections (prefixes 33, dimensions 93, units 380, quantities 200, unit_systems 8, currencies 178, scales 5); every database, collection and record check passes; 0 roundtrip failures.",
+  "Canonical JSON (sorted keys) of every collection and of the whole database is identical before and after the roundtrip; the YAML bytes are not (to_yaml reorders mapping keys and drops the leading '# yaml-language-server: $schema=...' comment, which units.yaml and scales.yaml do not have).",
+  "unitsdb 2.2.15 has no Unitsdb::Currencies collection class; currencies roundtrip through Database (database row) and per record through Unitsdb::Currency; the collection row is not_applicable.",
+  "Records carry keys their schema does not declare (allowed: no additionalProperties false): units quantity_references (all 380), si_derived_bases (24), prefixed (13), root_units[].prefix_reference (43 in gem data, 42 in b0b4315); unit_systems short and acceptable (8 each); scales short and description (5 each). All of them roundtrip.",
+  "The gem 2.2.15 data and b0b4315 differ only in units.yaml, and only in record NISTu196 (gram-force): root_units kgf-from-gf replaced by canonical_conversion factor '0.00980665' to NISTu11. The record passes in both profiles."
+ ],
+ "limits": [
+  "UnitsML XML roundtrip is out of scope (no criterion owner has named it).",
+  "Schema evaluation is a draft-06 subset; format and the prefixes allOf/if/then rule are listed as not evaluated.",
+  "No independent reference: verdicts are the Ruby library's own roundtrip at one head per profile, run twice."
+ ],
+ "files": {
+  "vectors.json": "2f3a551c42a4614e9d99cffeab7e947f28badad5eb139400061a3e9860c6a99b"
+ },
+ "archive_seals": {
+  "archive/capture-unitsdb-roundtrip.rb": "0acac1b359f5f9ede56a53341c8967649cdb6ec706c4fa429252e1061913c1cc",
+  "archive/unitsdb-roundtrip-gem-2.2.15.jsonl": "6678336f48a7ab29608a539ceebf7ce17f1bebe048109b7c452f2a27a80ff592",
+  "archive/unitsdb-roundtrip-gem-2.2.15-rerun.jsonl": "6678336f48a7ab29608a539ceebf7ce17f1bebe048109b7c452f2a27a80ff592",
+  "archive/unitsdb-roundtrip-b0b4315.jsonl": "d79d1630317d0286e579e325c4d9ac7effb6d5df13a4b98a840b16f45db32c5f",
+  "archive/unitsdb-roundtrip-b0b4315-rerun.jsonl": "d79d1630317d0286e579e325c4d9ac7effb6d5df13a4b98a840b16f45db32c5f"
+ },
+ "counts": {
+  "total_rows": 1812,
+  "per_profile": {
+   "unitsdb-gem-2.2.15": {
+    "meta": 1,
+    "database": 1,
+    "collection": 7,
+    "record": 897
+   },
+   "unitsdb-b0b4315": {
+    "meta": 1,
+    "database": 1,
+    "collection": 7,
+    "record": 897
+   }
+  }
+ },
+ "expected_ids_sha256": "d4cbc9b28cc286f0431129001d5b660670981e4bb94d5461a158e9ff45a1caf5",
+ "replay": "python -I scripts/unitsdb_schema_roundtrip.py check"
+}

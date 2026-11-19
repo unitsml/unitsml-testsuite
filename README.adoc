@@ -179,3 +179,65 @@ features, in two separate processes, and the outputs are byte-equal.
 with the reason for each.
 
 Check: `python scripts/ruby_unitsml_features.py check`.
+
+
+=== Typed quantity accuracy (`corpora/features/ruby-typed-quantity-accuracy/v1`)
+
+36 Ruby-generated rows that pin the class of each quantity binding value.
+A BigDecimal binding is limited to its precision, a Float binding is
+`limited_float`, and a Rational or a plain String binding is exact. Each row
+has a `plurimath.evaluate.quantity/1` request that keeps the class in the
+binding value: `{"decimal": "2.5"}`, `{"rational": ["5", "2"]}` or
+`{"binary64": "4004000000000000"}`; integers and String controls stay plain
+Strings. The expected result is what `Formula#evaluate_quantity` returns for
+the same typed values.
+
+The rows cover the six accuracy rows of `ruby-feature-additions/v1` (same
+ids, same results), String controls with the same digits, unused bindings,
+decimal precision and Float rounding, plus seven rows added to cover the
+Ruby source probes behind the Rust typed binding support. Each row also records what the Ruby
+request entry point answers for the same request at the producer head.
+
+The producer ran at plurimath-ruby `0a1df68` with unitsml-ruby `de4f5b9` in
+two separate processes, and the outputs are byte-equal.
+
+Check: `python scripts/ruby_typed_quantity_accuracy.py check`.
+
+
+=== UnitsDB schema roundtrip (`corpora/features/unitsdb-schema-roundtrip/v1`)
+
+Ruby-generated schema and provenance roundtrip results for every UnitsDB
+collection and record. The producer loads each snapshot with the unitsdb
+gem 2.2.15 (under unitsml-ruby 2ec9583) and writes it back with `to_yaml`,
+the same calls the unitsdb-ruby specs make: `Database.from_db(dir)`, each
+collection class `from_yaml(raw)` and each entity class per record. Every
+result is compared with canon's `be_yaml_equivalent_to`, which is the
+unitsdb-ruby contract, and also field by field with value classes, and the
+collection schema is evaluated on input and output. Any mismatch fails the
+row.
+
+There are two profiles: the data bundled in the unitsdb 2.2.15 gem, and
+UnitsDB b0b4315 (the merged #143 data). Each has 897 records in seven
+collections, and every check passes in both. The producer ran twice per
+profile in separate processes, and the outputs are byte-equal.
+
+Check: `python scripts/unitsdb_schema_roundtrip.py check`.
+
+
+=== Explicit quantity kind on kV*A (`corpora/features/ruby-explicit-kind-power/v1`)
+
+22 Ruby-generated rows that pin what the existing explicit quantity-kind API
+of unitsml-ruby 2ec9583 does with the unit `kV*A`: construction with a
+caller-declared kind (NISTq187 apparent power or NISTq20 power),
+`convert_to("kW")`, typed addition, subtraction and equality of the two kinds,
+and the untyped `kV * A` product with its `primary_kind`. Each row has one
+expected result per UnitsDB profile: the published unitsdb gem 2.2.15 data and
+the merged UnitsDB #143 commit b0b4315. Each snapshot is loaded read-only with
+`Database.from_db`. The two profiles give the same results.
+
+These rows record current API behaviour only. Whether `kV*A` should be typed
+automatically, or whether `convert_to` should refuse a kind that differs from
+the target unit's primary kind, is an open policy question for the data owner
+and is not covered here.
+
+Check: `python scripts/ruby_explicit_kind_power.py check`.

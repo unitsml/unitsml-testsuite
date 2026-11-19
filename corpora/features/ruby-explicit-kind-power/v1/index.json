@@ -1,0 +1,82 @@
+{
+ "schema": "unitsml-testsuite-ruby-explicit-kind-power-index/1",
+ "card": "F40",
+ "generation": "ruby-explicit-kind-power/v1",
+ "coverage_row": "F06.named_power_class",
+ "status": "current_api_behaviour: EXISTING-API conformance vectors. Every expected value is what the explicit (caller-declared) quantity-kind API of unitsml-ruby 2ec9583 returned or raised. They are not a policy decision on how kV*A should be typed.",
+ "relationship": "New additive generation; no earlier file changed. The H2 raw/summary profiles (host-evaluator/v1, evaluator-reference/v1) and every existing negative boundary are untouched.",
+ "not_covered": "Implicit or automatic typing of kV*A (inferring apparent power or power from the unit expression) is a future policy question and is not exercised or asserted here. No row assigns a kind the caller did not declare or the API did not return.",
+ "profiles": {
+  "unitsdb-2.2.15": "published unitsdb gem 2.2.15 bundled data (blobs equal to unitsdb 035665f), loaded read-only from the gem directory",
+  "unitsdb-143-b0b4315": "final merged UnitsDB #143 b0b4315fc5b53f6caa0a1edb94707b4f13223b38 (tree c57eb0ae330b051e6ea7909aeabe0a89b77707ed), git archive export"
+ },
+ "loader": "Unitsml::Unitsdb::Database.from_db(DATA_DIR) injected as the process's Unitsml::Unitsdb.database before any parse; ::Unitsdb.database guarded to raise in-process. The installed gem and data were not altered.",
+ "producer": {
+  "script": "archive/capture-power-kind.rb",
+  "runs": {
+   "unitsdb-2.2.15": [
+    "archive/power-kind-unitsdb-2.2.15-run1.jsonl",
+    "archive/power-kind-unitsdb-2.2.15-run2.jsonl"
+   ],
+   "unitsdb-143-b0b4315": [
+    "archive/power-kind-unitsdb-143-b0b4315-run1.jsonl",
+    "archive/power-kind-unitsdb-143-b0b4315-run2.jsonl"
+   ]
+  },
+  "unitsml": "unitsml-ruby 2ec9583a1902a2c13fd508f3bec558a2adde5de7 (origin/main; git archive export, unmodified)",
+  "unitsdb_gem": "2.2.15",
+  "runtime": "ruby 4.0.1 +PRISM x86_64-linux via mise, session-local bundle, nice -n 19, TZ=UTC LC_ALL=C.UTF-8; two separate processes per profile, byte-equal"
+ },
+ "findings": [
+  "Both profiles give identical results for all 22 probes; only the units.yaml digest differs between the snapshots.",
+  "Data (both profiles): NISTq187 'apparent power' and NISTq20 'power' are both NISTd16 with equivalence_class null; no unit has symbol VA or a volt-ampere name; NISTq187 is referenced only by NISTu401.",
+  "Construction: kind NISTq187 and kind NISTq20 are both accepted on kV*A (the kind gate checks dimension only); kind :primary on kV*A raises UnknownQuantityKindError; kind NISTq187 is also accepted on kW.",
+  "convert_to('kW') preserves the caller-declared kind (NISTq187 stays NISTq187, value 3/1); it is not refused, although the target kW has primary kind NISTq20. An untyped kV*A converts to an untyped kW.",
+  "Typed NISTq187 with NISTq20 (+ and -, same unit or kV*A with kW) raises QuantityKindMismatchError 'no shared equivalence class'; == returns false. NISTq187 + NISTq187 is legal.",
+  "An untyped operand keeps dimension-only gating and the result takes the typed operand's kind (kV*A untyped + kW NISTq20 gives kind NISTq20, in kV*A).",
+  "The untyped product kV * A, and parsed kV*A, have kind nil and primary_kind nil (composite expression, no single unit record). This is actual source behaviour, not an inferred power kind."
+ ],
+ "remaining_policy_question": "Owner (UnitsDB/UnitsML): should kV*A be typed implicitly (e.g. a VA unit with primary NISTq187, or a shared equivalence class), and should convert_to refuse a typed source whose kind differs from the target unit's primary kind? Neither is current API behaviour; the vectors here pin the current explicit-kind behaviour only.",
+ "counts": {
+  "construction": 5,
+  "conversion": 4,
+  "typed_arithmetic": 6,
+  "typed_arithmetic_control": 3,
+  "untyped_product": 4
+ },
+ "expected_ids": [
+  "construct-kva-kind-nistq187",
+  "construct-kva-kind-nistq20",
+  "construct-kva-kind-primary",
+  "construct-kw-kind-nistq187",
+  "construct-kw-kind-primary",
+  "convert-kva-nistq187-to-kw",
+  "convert-kva-nistq20-to-kw",
+  "convert-kva-untyped-to-kw",
+  "convert-kw-nistq187-to-kva",
+  "add-kva-nistq187-kva-nistq20",
+  "sub-kva-nistq187-kva-nistq20",
+  "add-kva-nistq187-kw-nistq20",
+  "sub-kva-nistq187-kw-nistq20",
+  "add-kva-nistq187-kw-primary",
+  "eq-kva-nistq187-kva-nistq20",
+  "add-kva-nistq187-kva-nistq187",
+  "add-kva-nistq187-kw-untyped",
+  "add-kva-untyped-kw-nistq20",
+  "product-kv-times-a-untyped",
+  "product-kv-times-a-typed-primary-operand",
+  "parsed-kva-untyped",
+  "primary-kind-kw"
+ ],
+ "replay": "python -I scripts/ruby_explicit_kind_power.py check",
+ "archive_seals": {
+  "archive/capture-power-kind.rb": "4743f62c1b6b083488552715eb8732e2d0a2fca4049ac8d030fa1b2a4516e6be",
+  "archive/power-kind-unitsdb-143-b0b4315-run1.jsonl": "d97c145732d5ec9bf1c587474e5c7d5335093993a8bfade29caefd19b59f2d97",
+  "archive/power-kind-unitsdb-143-b0b4315-run2.jsonl": "d97c145732d5ec9bf1c587474e5c7d5335093993a8bfade29caefd19b59f2d97",
+  "archive/power-kind-unitsdb-2.2.15-run1.jsonl": "56376c83e204aebd722eff317a2e6ec05850392f24a4cab884fb7e890fe89fa9",
+  "archive/power-kind-unitsdb-2.2.15-run2.jsonl": "56376c83e204aebd722eff317a2e6ec05850392f24a4cab884fb7e890fe89fa9"
+ },
+ "files": {
+  "vectors.json": "2a0238dcb94681c64388c67dd615d0cbcf83c6b38ddf7acd51429829297418e3"
+ }
+}

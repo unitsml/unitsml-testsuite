@@ -19,6 +19,9 @@ CHECKS = [
     (["scripts/evaluator_reference_vectors.py", "check"], "corpora/features/evaluator-reference/v1/vectors.json"),
     (["scripts/ruby_feature_additions.py", "check"], "corpora/features/ruby-feature-additions/v1/vectors.json"),
     (["scripts/ruby_unitsml_features.py", "check"], "corpora/features/ruby-unitsml-features/v1/vectors.json"),
+    (["scripts/ruby_typed_quantity_accuracy.py", "check"], "corpora/features/ruby-typed-quantity-accuracy/v1/vectors.json"),
+    (["scripts/unitsdb_schema_roundtrip.py", "check"], "corpora/features/unitsdb-schema-roundtrip/v1/vectors.json"),
+    (["scripts/ruby_explicit_kind_power.py", "check"], "corpora/features/ruby-explicit-kind-power/v1/vectors.json"),
 ]
 
 

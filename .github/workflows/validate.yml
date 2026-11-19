@@ -33,6 +33,12 @@ jobs:
         run: python -I scripts/ruby_feature_additions.py check
       - name: Ruby UnitsML features generation
         run: python -I scripts/ruby_unitsml_features.py check
+      - name: Ruby typed quantity accuracy generation
+        run: python -I scripts/ruby_typed_quantity_accuracy.py check
+      - name: UnitsDB schema and provenance roundtrip generation
+        run: python -I scripts/unitsdb_schema_roundtrip.py check
+      - name: Ruby explicit power kind generation
+        run: python -I scripts/ruby_explicit_kind_power.py check
       - name: Frozen corpora are append-only
         if: github.event_name == 'pull_request'
         run: python -I scripts/check_append_only.py "origin/${{ github.base_ref }}"
